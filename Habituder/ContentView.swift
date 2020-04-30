@@ -7,15 +7,23 @@
 //
 
 import SwiftUI
+import SwiftPI
 
 struct ContentView: View {
+    @EnvironmentObject var goalStore: GoalStore
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            GoalListView()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(GoalStore())
+            .environmentObject(NotificationStore())
+            .environment(\.colorScheme, .dark)
     }
 }
