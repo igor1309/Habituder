@@ -11,6 +11,7 @@ import UserNotifications
 
 struct Goal: Identifiable, Codable {
     var id = UUID()
+    
     var name: String
     var note: String
     //    var preferedPartOfDay: PartOfDay

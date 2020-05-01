@@ -10,11 +10,13 @@ import SwiftUI
 import SwiftPI
 import UserNotifications
 
+/// Удаление Goal в этом вью перемешивает индексы в списке GoalListView и всё ломается. Поэтому удаление остается только через свайп в списке (и нет кнопки Delete Goal в этом вью).
 struct GoalDetail: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var goalStore: GoalStore
     
     var goalIndex: Int
+    
     @State private var draft: Goal
     
     init(goal: Goal, goalIndex: Int) {
@@ -51,13 +53,11 @@ struct GoalDetail: View {
                     
                     PermisionsNoteView()
                 }
-                
-                /// Удаление Goal в этом вью перемешивает индексы в списке GoalListView и всё ломается. Поэтому удаление остается только через свайп в списке (и нет кнопки Delete Goal в этом вью).
             }
             .onAppear {
                 self.checkPendingNotifications()
             }
-            .navigationBarTitle(draft.name)
+            .navigationBarTitle("\(draft.name)", displayMode: .automatic)
             .navigationBarItems(
                 trailing: Button("Save") {
                     self.goalStore
@@ -66,6 +66,7 @@ struct GoalDetail: View {
                 }
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func scheduleNotification() {

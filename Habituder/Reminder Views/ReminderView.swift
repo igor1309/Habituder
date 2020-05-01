@@ -16,9 +16,22 @@ struct ReminderViewTesting: View {
         NavigationView {
             Form {
                 ReminderView(reminder: $monthlyReminder)
-                    .navigationBarTitle(Text("Repeat"), displayMode: .inline)
+//                    .navigationBarTitle(Text("Repeat"), displayMode: .inline)
             }
         }
+    }
+}
+
+struct PeriodPicker: View {
+    @Binding var period: RepeatPeriod
+    
+    var body: some View {
+        Picker(selection: $period, label: Text("Frequency")) {
+            ForEach(RepeatPeriod.allCases, id: \.self) { period in
+                Text(period.id).tag(period)
+            }
+        }
+//        .navigationBarTitle("Period Picker", displayMode: .automatic)
     }
 }
 
@@ -35,6 +48,8 @@ struct ReminderView: View {
                     .foregroundColor(.secondary)
             }
             .font(.footnote)
+            
+            PeriodPicker(period: $reminder.repeatPeriod)
             
             Picker(selection: $reminder.repeatPeriod, label: Text("Frequency")) {
                 ForEach(RepeatPeriod.allCases, id: \.self) { period in

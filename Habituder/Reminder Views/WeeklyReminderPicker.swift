@@ -25,10 +25,12 @@ struct WeeklyReminderPicker: View {
         
         let weekday: Binding<Int> = Binding(
             get: {
+                print("weekday: Binding get: \(self.reminder.dateComponents.weekday)")
                 return (self.reminder.dateComponents.weekday ?? 1)
         },
             set: {
                 print("FIX THIS!!!")
+                print("weekday: Binding set: weekday: \($0)")
                 let calendar = Calendar.current
                 self.reminder.pickerDate = calendar.date(byAdding: .weekday,
                                                          value: $0,

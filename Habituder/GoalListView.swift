@@ -15,20 +15,24 @@ struct GoalListView: View {
     @State private var showDetail = false
     @State private var index: Int = 0
     
-    func row(index: Int) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    func row(goal: Goal) -> some View {
+        var index: Int {
+            goalStore.goals.firstIndex(of: goal)!
+        }
+        
+        return VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline) {
-                Text(goalStore.goals[index].name)
+                Text(goal.name)
                     .foregroundColor(.systemOrange)
                 
                 Spacer()
                 
-                Text(goalStore.goals[index].reminder.description)
+                Text(goal.reminder.description)
                     .foregroundColor(.secondary)
                     .font(.caption)
             }
             
-            Text(goalStore.goals[index].note)
+            Text(goal.note)
                 .foregroundColor(.secondary)
                 .font(.subheadline)
         }
@@ -46,8 +50,8 @@ struct GoalListView: View {
         List {
             PermisionsNoteView()
             
-            ForEach(goalStore.goals.indices, id: \.self) { index in
-                self.row(index: index)
+            ForEach(goalStore.goals) { goal in
+                self.row(goal: goal)
             }
             .onMove(perform: move)
             .onDelete(perform: delete)
@@ -55,9 +59,8 @@ struct GoalListView: View {
         .sheet(isPresented: self.$showDetail) {
             GoalDetail(goal: self.goalStore.goals[self.index], goalIndex: self.index)
                 .environmentObject(self.goalStore)
-//                .environmentObject(self.notificationStore)
         }
-        .navigationBarTitle("Goals")
+        .navigationBarTitle("Goals", displayMode: .automatic)
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
