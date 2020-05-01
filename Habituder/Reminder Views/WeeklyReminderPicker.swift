@@ -22,24 +22,18 @@ struct WeeklyReminderPicker: View {
     @Binding var reminder: Reminder
     
     var body: some View {
-        let selectedDate: Binding<Date> = Binding(
-            get: {
-                self.reminder.date
-        },
-            set: {
-                let calendar = Calendar.current
-                var components = calendar.dateComponents(self.reminder.repeatPeriod.pickerDateComponents, from: $0)
-                components.weekday = self.reminder.dateComponents.weekday ?? 0
-                self.reminder.dateComponents = components
-        }
-        )
         
         let weekday: Binding<Int> = Binding(
             get: {
-                return self.reminder.dateComponents.weekday ?? 0
+                return (self.reminder.dateComponents.weekday ?? 1)
         },
             set: {
-                self.reminder.dateComponents.weekday = $0
+                print("FIX THIS!!!")
+                let calendar = Calendar.current
+                self.reminder.pickerDate = calendar.date(byAdding: .weekday,
+                                                         value: $0,
+                                                         to: self.reminder.pickerDate) ?? Date()
+                //                self.reminder.dateComponents.weekday = $0
                 
         }
         )
@@ -51,7 +45,7 @@ struct WeeklyReminderPicker: View {
 //                .pickerStyle(WheelPickerStyle())
                 .labelsHidden()
             
-            DatePicker("At a time", selection: selectedDate, displayedComponents: .hourAndMinute)
+            DatePicker("At a time", selection: $reminder.pickerDate, displayedComponents: .hourAndMinute)
         }
     }
 }

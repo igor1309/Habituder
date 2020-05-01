@@ -22,23 +22,18 @@ struct MonthlyReminderPicker: View {
     @Binding var reminder: Reminder
     
     var body: some View {
-        let selectedDate: Binding<Date> = Binding(
-            get: {
-                self.reminder.date
-        },
-            set: {
-                let calendar = Calendar.current
-                let components = calendar.dateComponents(self.reminder.repeatPeriod.pickerDateComponents, from: $0)
-                self.reminder.dateComponents = components
-        }
-        )
         
         let day: Binding<Int> = Binding(
             get: {
                 return self.reminder.dateComponents.day ?? 1
         },
             set: {
-                self.reminder.dateComponents.day = $0
+                print("FIX THIS!!!")
+                let calendar = Calendar.current
+                self.reminder.pickerDate = calendar.date(byAdding: .day,
+                                                         value: $0,
+                                                         to: self.reminder.pickerDate) ?? Date()
+//                self.reminder.dateComponents.day = $0
         }
         )
         
@@ -62,14 +57,7 @@ struct MonthlyReminderPicker: View {
             }
             
             Form {
-                DatePicker("At a time", selection: selectedDate, displayedComponents: .hourAndMinute)
-            }
-        }
-        .onAppear {
-            if self.reminder.dateComponents.day == nil {
-                DispatchQueue.main.async {
-                    self.reminder.dateComponents.day = 1
-                }
+                DatePicker("At a time", selection: $reminder.pickerDate, displayedComponents: .hourAndMinute)
             }
         }
     }

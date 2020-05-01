@@ -9,38 +9,31 @@
 import Foundation
 
 struct Reminder: Codable, Hashable {
-    var repeatPeriod: RepeatPeriod {
-        didSet {
-            cleanComponents()
-        }
-    }
-    var dateComponents: DateComponents
-}
+    var repeatPeriod: RepeatPeriod
     
-extension Reminder {
+    var pickerDate: Date
     
-    var date: Date {
+    var dateComponents: DateComponents {
         let calendar = Calendar.current
-        let date = calendar.date(from: dateComponents)
-        return date ?? Date()
-    }
-    
-    mutating private func cleanComponents() {
+        var components = calendar.dateComponents([.day, .hour, .minute, .weekday], from: pickerDate)
+        
         switch self.repeatPeriod {
         case .daily:
-            dateComponents.day = nil
-            dateComponents.weekday = nil
+            components.day = nil
+            components.weekday = nil
         case .weekly:
-            dateComponents.day = nil
-            if dateComponents.weekday == nil {
-                dateComponents.weekday = 0
+            components.day = nil
+            if components.weekday == nil {
+                components.weekday = 0
             }
         case .monthly:
-            dateComponents.weekday = nil
-            if dateComponents.day == nil {
-                dateComponents.day = 1
+            components.weekday = nil
+            if components.day == nil {
+                components.day = 1
             }
         }
+        
+        return components
     }
     
     var description: String {
@@ -52,7 +45,7 @@ extension Reminder {
         positional.unitsStyle = .positional
         
         let dateStr = positional.string(from: DateComponents(hour: dateComponents.hour, minute: dateComponents.minute))!
-
+        
         switch self.repeatPeriod {
         case .daily:
             return "Daily at \(dateStr)"
@@ -73,22 +66,21 @@ extension Reminder {
 }
 
 extension Reminder {
-    static let morningDailyReminder = Reminder(
-        repeatPeriod: .daily,
-        dateComponents: DateComponents(hour: 9,
-                                       minute: 15))
+    init(repeatPeriod: RepeatPeriod, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, weekday: Int? = nil) {
+        self.repeatPeriod = repeatPeriod
+        
+        let dateComponents = DateComponents(day: day, hour: hour, minute: minute, weekday: weekday)
+        let calendar = Calendar.current
+        let date = calendar.date(from: dateComponents)
+        self.pickerDate = date ?? Date()
+    }
     
-    static let weeklyReminder = Reminder(
-        repeatPeriod: .weekly,
-        dateComponents: DateComponents(day: 3,
-                                       hour: 11,
-                                       minute: 14,
-                                       weekday: 4))
+    static let morningDailyReminder =
+        Reminder(repeatPeriod: .daily, hour: 9, minute: 15)
     
-    static let monthlyReminder = Reminder(
-        repeatPeriod: .monthly,
-        dateComponents: DateComponents(day: 3,
-                                       hour: 10,
-                                       minute: 44,
-                                       weekday: 4))
+    static let weeklyReminder =
+        Reminder(repeatPeriod: .weekly, day: 3, hour: 11, minute: 14, weekday: 4)
+    
+    static let monthlyReminder =
+        Reminder(repeatPeriod: .monthly, day: 3, hour: 10, minute: 44, weekday: 4)
 }
