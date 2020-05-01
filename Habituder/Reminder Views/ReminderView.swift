@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ReminderViewTesting: View {
     @State private var monthlyReminder: Reminder = .weeklyReminder
+//    @State private var draft: Goal = Goal(name: "Test Goal", note: "Text Goal Note", reminder: Reminder.weeklyReminder)
     
     var body: some View {
         NavigationView {
@@ -23,6 +24,7 @@ struct ReminderViewTesting: View {
 
 struct ReminderView: View {
     @Binding var reminder: Reminder
+//    @Binding var goal: Goal
     
     var body: some View {
         Group {

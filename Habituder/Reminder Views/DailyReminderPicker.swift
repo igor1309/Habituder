@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DailyReminderPickerTester: View {
     @State private var reminder: Reminder = .morningDailyReminder
+//    @State private var draft: Goal = Goal(name: "Test Goal", note: "Text Goal Note", reminder: Reminder.weeklyReminder)
     
     var body: some View {
         Form {
@@ -33,7 +34,16 @@ struct DailyReminderPicker: View {
         }
         )
         
-        return DatePicker("Daily at", selection: selectedDate, displayedComponents: .hourAndMinute)
+//        return DatePicker("Daily at", selection: selectedDate, displayedComponents: .hourAndMinute)
+        return DailyDatePicker(date:selectedDate)
+    }
+}
+
+struct DailyDatePicker: View {
+    @Binding var date: Date
+    
+    var body: some View {
+        DatePicker("Daily at", selection: $date, displayedComponents: .hourAndMinute)
     }
 }
 

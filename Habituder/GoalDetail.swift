@@ -33,17 +33,18 @@ struct GoalDetail: View {
                 }
                 
                 Section(header: Text("Reminder".uppercased())) {
+//                    ReminderView(reminder: $draft.reminder)
                     ReminderView(reminder: $draft.reminder)
                 }
                 
                 Section(header: Text("Pending Notifications".uppercased())) {
                     
-                    Text("\(pendingNotifications.isEmpty ? "none" : pendingNotifications)")
-                        .foregroundColor(.secondary)
-                        .font(.caption)
+                    Text("\(pendingNotifications.isEmpty ? "ISSUE: reminder not registered" : pendingNotifications)")
+                        .foregroundColor(pendingNotifications.isEmpty ? .systemRed : .secondary)
+                        .font(pendingNotifications.isEmpty ? .body : .caption)
                     
                     if pendingNotifications.isEmpty {
-                        Button("TBD: Schedule Notification") {
+                        Button("TBD: FIX: Schedule Notification") {
                             self.scheduleNotification()
                         }
                     }

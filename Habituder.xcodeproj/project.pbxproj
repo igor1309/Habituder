@@ -102,7 +102,6 @@
 				2AEEC587245B7B5700BA1AE3 /* PermisionsNoteView.swift */,
 				2AEEC58B245B7B8000BA1AE3 /* Reminder Views */,
 				2AEEC5B1245B7D4A00BA1AE3 /* Supporting */,
-				2AEEC590245B7BA800BA1AE3 /* WeekdayPicker.swift */,
 				2AEEC5B0245B7D3A00BA1AE3 /* Extensions */,
 				2AEEC598245B7BB500BA1AE3 /* Model */,
 				2AEEC574245B7AA600BA1AE3 /* Assets.xcassets */,
@@ -125,9 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				2AEEC58C245B7B8000BA1AE3 /* ReminderView.swift */,
-				2AEEC58D245B7B8000BA1AE3 /* MonthlyReminderPicker.swift */,
 				2AEEC58E245B7B8000BA1AE3 /* DailyReminderPicker.swift */,
 				2AEEC58F245B7B8000BA1AE3 /* WeeklyReminderPicker.swift */,
+				2AEEC590245B7BA800BA1AE3 /* WeekdayPicker.swift */,
+				2AEEC58D245B7B8000BA1AE3 /* MonthlyReminderPicker.swift */,
 			);
 			path = "Reminder Views";
 			sourceTree = "<group>";
