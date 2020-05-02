@@ -25,6 +25,8 @@ struct GoalEditor: View {
         self.index = index
     }
     
+    @State private var partOfDay: PartOfDay = .morning
+    
     var body: some View {
         
         func picker() -> some View {
@@ -44,6 +46,13 @@ struct GoalEditor: View {
                 )
             }
         }
+        
+        let dayPart: Binding<PartOfDay> = Binding(
+            get: { self.partOfDay },
+            set: {
+                self.partOfDay = $0
+                self.reminder.pickerTime = self.partOfDay.time
+        })
         
         return NavigationView {
             Form {
@@ -70,6 +79,19 @@ struct GoalEditor: View {
                     DatePicker(reminder.repeatPeriod == .daily ? "Daily at" : "At a time",
                                selection: $reminder.pickerTime,
                                displayedComponents: .hourAndMinute)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Quick Time")
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
+                        
+                        Picker("Part of the Day", selection: dayPart) {
+                            ForEach(PartOfDay.allCases, id: \.self) { part in
+                                Text(part.id).tag(part)
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                    }
                 }
             }
             .navigationBarTitle(name)

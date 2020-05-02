@@ -19,6 +19,8 @@
 		2A2E1768245DD1AD00A57D42 /* GoalEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */; };
 		2A2E176A245DF4E000A57D42 /* RepeatPeriodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1769245DF4E000A57D42 /* RepeatPeriodPicker.swift */; };
 		2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E176B245DF5A200A57D42 /* MonthView.swift */; };
+		2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E176D245E049200A57D42 /* PartOfDay.swift */; };
+		2A2E1770245E0D4300A57D42 /* PartOfDaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E176F245E0D4300A57D42 /* PartOfDaySettingsView.swift */; };
 		2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */; };
 		2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */; };
 		2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC572245B7AA500BA1AE3 /* ContentView.swift */; };
@@ -41,6 +43,8 @@
 		2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditor.swift; sourceTree = "<group>"; };
 		2A2E1769245DF4E000A57D42 /* RepeatPeriodPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatPeriodPicker.swift; sourceTree = "<group>"; };
 		2A2E176B245DF5A200A57D42 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		2A2E176D245E049200A57D42 /* PartOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDay.swift; sourceTree = "<group>"; };
+		2A2E176F245E0D4300A57D42 /* PartOfDaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDaySettingsView.swift; sourceTree = "<group>"; };
 		2AEEC56B245B7AA500BA1AE3 /* Habituder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habituder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 				2A0BD6D6245CC27D00C27F9B /* Goal.swift */,
 				2A0BD6D8245CC4EE00C27F9B /* Reminder.swift */,
 				2A0BD6DA245CC7C200C27F9B /* RepeatPeriod.swift */,
+				2A2E176D245E049200A57D42 /* PartOfDay.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -92,6 +97,14 @@
 				2A2E1764245DA90C00A57D42 /* DateComponents+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2A2E1771245E0F7200A57D42 /* TODO */ = {
+			isa = PBXGroup;
+			children = (
+				2A2E176F245E0D4300A57D42 /* PartOfDaySettingsView.swift */,
+			);
+			path = TODO;
 			sourceTree = "<group>";
 		};
 		2AEEC562245B7AA500BA1AE3 = {
@@ -118,6 +131,7 @@
 				2AEEC572245B7AA500BA1AE3 /* ContentView.swift */,
 				2A0BD6D1245CC22600C27F9B /* GoalListView.swift */,
 				2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */,
+				2A2E1771245E0F7200A57D42 /* TODO */,
 				2A2E1766245DA91800A57D42 /* Extensions */,
 				2A2E175D245D974E00A57D42 /* Reminder Views */,
 				2A0BD6D5245CC23800C27F9B /* Model */,
@@ -218,10 +232,12 @@
 				2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */,
 				2A2E1765245DA90D00A57D42 /* DateComponents+Ext.swift in Sources */,
 				2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */,
+				2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */,
 				2A0BD6DB245CC7C200C27F9B /* RepeatPeriod.swift in Sources */,
 				2A0BD6D9245CC4EE00C27F9B /* Reminder.swift in Sources */,
 				2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */,
 				2A0BD6D4245CC23300C27F9B /* GoalStore.swift in Sources */,
+				2A2E1770245E0D4300A57D42 /* PartOfDaySettingsView.swift in Sources */,
 				2A2E1763245D9D8100A57D42 /* WeekdayPicker.swift in Sources */,
 				2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */,
 				2A2E1761245D97EB00A57D42 /* MonthlyReminderPicker.swift in Sources */,
@@ -365,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Habituder/Preview Content\"";
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
@@ -386,6 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Habituder/Preview Content\"";
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
