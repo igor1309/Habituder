@@ -29,7 +29,7 @@ struct GoalDetailView: View {
     @State private var draft: Goal
     
     @State private var test: Goal = Goal(name: "test", note: "testtest", reminder: Reminder(repeatPeriod: .daily, hour: 8, minute: 35))
-    @State private var showTesting = false
+    @State private var showTesting = true
     
     init(goal: Goal, index: Int) {
         self._draft = State(initialValue: goal)
@@ -76,7 +76,6 @@ struct GoalDetailView: View {
             }
         }
         
-        
         return NavigationView {
             Form {
                 Section(header: Text("Details".uppercased())
@@ -112,26 +111,28 @@ struct GoalDetailView: View {
                 //  MARK: - TESTING
                 //
                 if showTesting {
-                    Section(header: Text("Draft Testing".uppercased()),
-                            footer: Text("Check whether picker binding to draft is working not just once. Also check print in debug.\nCould you use DRAFT or continue with binding to array elements via index?")) {
-                                
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text("custom binding periodDraftBinding")
-                                        .font(.subheadline)
-                                    RepeatPeriodPicker(period: periodDraftBinding)
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text("@State: $draft.reminder.repeatPeriod")
-                                        .font(.subheadline)
-                                    RepeatPeriodPicker(period: $draft.reminder.repeatPeriod)
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text("@State: $test.reminder.repeatPeriod")
-                                        .font(.subheadline)
-                                    RepeatPeriodPicker(period: $test.reminder.repeatPeriod)
-                                }
+                    Section(
+                        header: Text("Draft Testing".uppercased())
+                            .foregroundColor(.systemOrange),
+                        footer: Text("Check whether picker binding to draft is working not just once. Also check print in debug.\nCould you use DRAFT or continue with binding to array elements via index?")
+                    ) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("custom binding periodDraftBinding")
+                                .font(.subheadline)
+                            RepeatPeriodPicker(period: periodDraftBinding)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("@State: $draft.reminder.repeatPeriod")
+                                .font(.subheadline)
+                            RepeatPeriodPicker(period: $draft.reminder.repeatPeriod)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("@State: $test.reminder.repeatPeriod")
+                                .font(.subheadline)
+                            RepeatPeriodPicker(period: $test.reminder.repeatPeriod)
+                        }
                     }
                 }
             }

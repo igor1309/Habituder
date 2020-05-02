@@ -12,11 +12,8 @@ import Combine
 
 final class GoalStore: ObservableObject {
     
-    @Published /*private(set)*/ var goals: [Goal] {
-        didSet {
-            save()
-        }
-    }
+    @Published /*private(set)*/ var goals: [Goal]
+    //    { didSet { save() } }
     
     init() {
         if let savedGoals: [Goal] = loadJSONFromDocDir("goals.json") {
@@ -44,11 +41,25 @@ extension GoalStore {
         }
         
         goals[index] = newValue
+        save()
+        
+        goals[0].createNotification()
+    }
+    
+    func update(goalIndex: Int, name: String, note: String, reminder: Reminder) {
+        
+        goals[goalIndex].name = name
+        goals[goalIndex].note = note
+        goals[goalIndex].reminder = reminder
+        save()
+        
         goals[0].createNotification()
     }
     
     func appendTestingStore() {
         goals = goals + Goal.testingGoals()
+        save()
+
         for goal in goals {
             goal.createNotification()
         }
@@ -67,22 +78,25 @@ extension GoalStore {
                                             hour: 9,
                                             minute: 17))
         goals.insert(empty, at: 0)
+        save()
+        
         goals[0].createNotification()
     }
     
     func remove(goal: Goal) {
         goals.removeAll { $0.id == goal.id }
+        save()
     }
     
     func move(from source: IndexSet, to destination: Int) {
         goals.move(fromOffsets: source, toOffset: destination)
+        save()
     }
     
     func delete(at offsets: IndexSet) {
         //MARK: NOTIFICATIONS!!!!!!!
         //
         goals.remove(atOffsets: offsets)
+        save()
     }
-    
-
 }

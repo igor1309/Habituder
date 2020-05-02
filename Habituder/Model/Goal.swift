@@ -40,21 +40,13 @@ extension Goal {
         let hour: Int = components.hour!
         let minute: Int = components.minute!
         
-        let reminder0 = Reminder(repeatPeriod: .daily,
-                                 hour: hour, minute: minute + 3
-        )
+        let reminder0 = Reminder(repeatPeriod: .daily, hour: hour, minute: minute + 3)
         
-        let reminder1 = Reminder(repeatPeriod: .daily,
-                                 hour: hour, minute: minute + 6
-        )
+        let reminder1 = Reminder(repeatPeriod: .daily, hour: hour, minute: minute + 6)
         
-        let reminder2 = Reminder(repeatPeriod: .daily,
-                                 hour: hour, minute: minute + 9
-        )
+        let reminder2 = Reminder(repeatPeriod: .daily, hour: hour, minute: minute + 9)
         
-        let reminder3 = Reminder(repeatPeriod: .daily,
-                                 hour: hour, minute: minute + 12
-        )
+        let reminder3 = Reminder(repeatPeriod: .daily, hour: hour, minute: minute + 12)
         
         return [
             Goal(name: "Daily Coding",

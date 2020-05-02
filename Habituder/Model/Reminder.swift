@@ -9,7 +9,20 @@
 import Foundation
 
 struct Reminder: Codable {
-    var repeatPeriod: RepeatPeriod
+    var repeatPeriod: RepeatPeriod {
+        didSet {
+            switch repeatPeriod {
+            case .daily:
+                return
+            case .weekly:
+                if weekday == nil { weekday = 1 }
+                return
+            case .monthly:
+                if day == nil { day = 1 }
+                return
+            }
+        }
+    }
     var pickerTime: Date
     var day: Int?
     var weekday: Int?
@@ -61,7 +74,7 @@ extension Reminder {
             return "Daily at \(timeStr)"
         case .weekly:
             guard weekday != nil else { return "error: weekday in reminder is nil" }
-            return "Every week on \(Calendar.current.weekdaySymbols[weekday!])(\(weekday!)) at \(timeStr)"
+            return "Every \(Calendar.current.weekdaySymbols[weekday!]) at \(timeStr)"
         case .monthly:
             guard day != nil else { return "error: day in reminder is nil" }
             return "Every month on \(day!)th at \(timeStr)"

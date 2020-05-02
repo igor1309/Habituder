@@ -12,7 +12,7 @@ import SwiftPI
 struct GoalListView: View {
     @EnvironmentObject var goalStore: GoalStore
     
-    @State private var showDetail = false
+    @State private var showEditor = false
     @State private var index: Int = 0
     
     private func goalRow(goal: Goal) -> some View {
@@ -37,7 +37,7 @@ struct GoalListView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             self.index = index
-            self.showDetail = true
+            self.showEditor = true
         }
     }
     
@@ -57,8 +57,9 @@ struct GoalListView: View {
             .onMove(perform: move)
             .onDelete(perform: delete)
         }
-        .sheet(isPresented: $showDetail) {
-            GoalDetailView(goal: self.goalStore.goals[self.index], index: self.index)
+        .sheet(isPresented: $showEditor) {
+            GoalEditor(goal: self.goalStore.goals[self.index], index: self.index)
+                //    GoalDetailView(goal: self.goalStore.goals[self.index], index: self.index)
                 .environmentObject(self.goalStore)
         }
         .navigationBarTitle("Goals", displayMode: .automatic)
@@ -94,7 +95,7 @@ struct GoalListView: View {
     private func delete(at offsets: IndexSet) {
         goalStore.delete(at: offsets)
     }
-
+    
 }
 
 struct GoalListView_Previews: PreviewProvider {

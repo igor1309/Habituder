@@ -31,6 +31,7 @@ struct WeeklyReminderPicker: View {
         )
         
         return Group {
+            Text("Every \(Calendar.current.weekdaySymbols[weekday.wrappedValue])")            
             WeekdayPicker(weekday: weekday, shortSymbols: true)
                 .labelsHidden()
                 .pickerStyle(SegmentedPickerStyle())
