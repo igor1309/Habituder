@@ -80,6 +80,19 @@ extension Reminder {
             return "Every month on \(day!)th at \(timeStr)"
         }
     }
+    
+    var shortDescription: String {
+        switch self.repeatPeriod {
+        case .daily:
+            return "Daily"
+        case .weekly:
+            guard weekday != nil else { return "error: weekday in reminder is nil" }
+            return "Every \(Calendar.current.weekdaySymbols[weekday!])"
+        case .monthly:
+            guard day != nil else { return "error: day in reminder is nil" }
+            return "Every month on \(day!)th"
+        }
+    }
 }
 
 extension Reminder {

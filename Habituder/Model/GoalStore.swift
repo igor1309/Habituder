@@ -12,7 +12,7 @@ import Combine
 
 final class GoalStore: ObservableObject {
     
-    @Published /*private(set)*/ var goals: [Goal]
+    @Published private(set) var goals: [Goal]
     //    { didSet { save() } }
     
     init() {

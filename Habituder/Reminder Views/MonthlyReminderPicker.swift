@@ -24,7 +24,7 @@ struct MonthlyReminderPicker: View {
                     Text("Each")
                         .padding(.top)
                     
-                    Text(reminder.description)
+                    Text(reminder.shortDescription)
                         .foregroundColor(.secondary)
                         .font(.caption)
                 }

@@ -39,7 +39,7 @@ struct GoalEditor: View {
                 return AnyView(
                     NavigationLink(destination: MonthlyReminderPicker(reminder: $reminder)
                     ) {
-                        Text(reminder.description)
+                        Text(reminder.shortDescription)
                     }
                 )
             }
@@ -50,18 +50,19 @@ struct GoalEditor: View {
                 Section(header: Text("Details".uppercased())
                 ) {
                     TextField("Goal Name", text: $name)
+                        .foregroundColor(.systemOrange)
+                    
                     TextField("Goal Note", text: $note)
                 }
                 
-                Section(header: Text("Reminder".uppercased()),
-                        footer: VStack(alignment: .leading, spacing: 4) {
-                            Text("\(reminder.description)")
-                                .foregroundColor(.systemOrange)
-                            Text("\(reminder.repeatPeriod.id): \(reminder.toString())")
-                                .foregroundColor(.tertiary)
-                        }
-                        .font(.caption)
+                Section(header: Text("Remind Me".uppercased()),
+                        footer: Text("\(reminder.repeatPeriod.id): \(reminder.toString())")
+                            .foregroundColor(.tertiary)
+                            .font(.caption)
                 ) {
+                    Text("\(reminder.description)")
+                        .foregroundColor(.systemOrange)
+                    
                     RepeatPeriodPicker(period: $reminder.repeatPeriod)
                     
                     picker()
