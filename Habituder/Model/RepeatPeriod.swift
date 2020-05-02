@@ -1,8 +1,8 @@
 //
 //  RepeatPeriod.swift
-//  GoalGetter
+//  Habituder
 //
-//  Created by Igor Malyarov on 28.04.2020.
+//  Created by Igor Malyarov on 02.05.2020.
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 

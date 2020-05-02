@@ -1,95 +1,77 @@
 //
 //  Reminder.swift
-//  GoalGetter
+//  Habituder
 //
-//  Created by Igor Malyarov on 28.04.2020.
+//  Created by Igor Malyarov on 01.05.2020.
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 
 import Foundation
 
-struct Reminder: Codable, Hashable {
+struct Reminder: Codable {
     var repeatPeriod: RepeatPeriod
-    
-    var pickerDate: Date
-    
+    var pickerTime: Date
+    var day: Int?
     var weekday: Int?
     
-    var dateComponents: DateComponents {
-        let calendar = Calendar.current
-        var components = calendar.dateComponents([.day, .hour, .minute], from: pickerDate)
+    init(repeatPeriod: RepeatPeriod,
+         day: Int? = nil,
+         hour: Int? = nil,
+         minute: Int? = nil,
+         weekday: Int? = nil) {
         
-        switch self.repeatPeriod {
-            
-        case .daily:
-            components.day = nil
-            components.weekday = nil
-            
-        case .weekly:
-            components.day = nil
-            components.weekday = weekday
-            
-        case .monthly:
-            components.weekday = nil
-            if components.day == nil {
-                components.day = 1
-            }
-        }
-        
-        return components
-    }
-    
-    var description: String {
-        guard dateComponents.hour != nil && dateComponents.minute != nil else {
-            return "error: hour or minute in reminder is nil"
-        }
-        
-        let positional = DateComponentsFormatter()
-        positional.unitsStyle = .positional
-        
-        let dateStr = positional.string(from: DateComponents(hour: dateComponents.hour, minute: dateComponents.minute))!
-        
-        switch self.repeatPeriod {
-        case .daily:
-            return "Daily at \(dateStr)"
-        case .weekly:
-            print("dateComponents.weekday: \(dateComponents.weekday)")
-            if dateComponents.weekday == nil {
-                return "error: weekday in reminder is nil"
-            } else if Calendar.current.weekdaySymbols.indices.contains(dateComponents.weekday!) {
-                return "Every week on \(Calendar.current.weekdaySymbols[dateComponents.weekday!]) at \(dateStr)"
-            } else {
-                return "error: weekday in reminder is out of range!"
-            }
-        case .monthly:
-            if dateComponents.day == nil {
-                return "error: day in reminder is nil"
-            } else {
-                return "Every month on \(dateComponents.day!)th at \(dateStr)"
-            }
-        }
-    }
-    
-    init(repeatPeriod: RepeatPeriod, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, weekday: Int? = nil) {
         self.repeatPeriod = repeatPeriod
         
-        let dateComponents = DateComponents(day: day,
-                                            hour: hour,
+        let dateComponents = DateComponents(hour: hour,
                                             minute: minute)
         let calendar = Calendar.current
         let date = calendar.date(from: dateComponents)
-        self.pickerDate = date!// ?? Date()
+        self.pickerTime = date!
+        
+        self.day = day
         self.weekday = weekday
     }
 }
 
 extension Reminder {
-    static let morningDailyReminder =
-        Reminder(repeatPeriod: .daily, hour: 9, minute: 15)
+    func toString() -> String {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.hour, .minute], from: pickerTime)
+        components.day = day
+        components.weekday = weekday
+        
+        return components.toString()
+    }
     
-    static let weeklyReminder =
-        Reminder(repeatPeriod: .weekly, day: 3, hour: 11, minute: 14, weekday: 4)
-    
-    static let monthlyReminder =
-        Reminder(repeatPeriod: .monthly, day: 3, hour: 10, minute: 44, weekday: 4)
+    var description: String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        
+        let calendar = Calendar.autoupdatingCurrent
+        let timeComponents = calendar.dateComponents([.hour, .minute], from: pickerTime)
+        
+        guard let timeString = formatter.string(from: timeComponents) else {
+            return "unable to process reminder"
+        }
+        
+        let timeStr = timeComponents.hour == 0 ? "00:" + timeString : timeString
+        
+        switch self.repeatPeriod {
+        case .daily:
+            return "Daily at \(timeStr)"
+        case .weekly:
+            guard weekday != nil else { return "error: weekday in reminder is nil" }
+            return "Every week on \(Calendar.current.weekdaySymbols[weekday!])(\(weekday!)) at \(timeStr)"
+        case .monthly:
+            guard day != nil else { return "error: day in reminder is nil" }
+            return "Every month on \(day!)th at \(timeStr)"
+        }
+    }
 }
+
+extension Reminder {
+    static let dailyReminder = Reminder(repeatPeriod: .daily, hour: 9, minute: 17)
+    static let weeklyReminder = Reminder(repeatPeriod: .weekly, hour: 9, minute: 17, weekday: 4)
+    static let monthlyReminder = Reminder(repeatPeriod: .monthly, day: 3, hour: 9, minute: 17)
+}
+

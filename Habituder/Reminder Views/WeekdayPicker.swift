@@ -1,15 +1,33 @@
 //
 //  WeekdayPicker.swift
-//  GoalGetter
+//  Habituder
 //
-//  Created by Igor Malyarov on 28.04.2020.
+//  Created by Igor Malyarov on 02.05.2020.
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 
 import SwiftUI
 
+struct WeekdayPickerTester: View {
+    @State private var weekday: Int = 1
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Text(Calendar.current.weekdaySymbols[weekday])
+                Text("weekday: \(weekday)")
+                WeekdayPicker(weekday: $weekday, shortSymbols: true)
+                    .pickerStyle(SegmentedPickerStyle())
+                
+                WeekdayPicker(weekday: $weekday, shortSymbols: false)
+            }
+        }
+    }
+}
+
 struct WeekdayPicker: View {
-    @Binding var selected: Int
+    @Binding var weekday: Int
+    
     var shortSymbols: Bool
     
     var weekdaySymbols: [String] {
@@ -21,43 +39,17 @@ struct WeekdayPicker: View {
     }
     
     var body: some View {
-        Picker(selection: $selected, label: Text("Weekday")) {
+        Picker(selection: $weekday, label: Text("Weekday")) {
             ForEach(weekdaySymbols.indices, id: \.self) { dayIndex in
-//                HStack {
-                    Text(self.weekdaySymbols[dayIndex]).tag(dayIndex)
-//                    Spacer()
-                    
-//                    if self.selected == dayIndex {
-//                        Image(systemName: "checkmark")
-//                            .foregroundColor(.systemBlue)
-//                    }
-//                }
-//                .contentShape(Rectangle())
-                //                .onTapGesture {
-                //                    //  MARK: ADD LIGHT HAPTIC FEEDBACK
-                //                    //
-                //                    if self.selectedDay == day {
-                //                        self.selectedDay = nil
-                //                    } else {
-                //                        self.selectedDay = day
-                //                    }
-                //                }
+                Text(self.weekdaySymbols[dayIndex]).tag(dayIndex)
             }
         }
     }
 }
 
-struct WeekdayPickerTester: View {
-    @State private var day: Int = 0
-    
-    var body: some View {
-        WeekdayPicker(selected: $day, shortSymbols: false)
-    }
-}
-
 struct WeekdayPicker_Previews: PreviewProvider {
-    
     static var previews: some View {
         WeekdayPickerTester()
+            .environment(\.colorScheme, .dark)
     }
 }

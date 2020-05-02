@@ -1,19 +1,21 @@
 //
 //  WeeklyReminderPicker.swift
-//  GoalGetter
+//  Habituder
 //
-//  Created by Igor Malyarov on 29.04.2020.
+//  Created by Igor Malyarov on 02.05.2020.
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 
 import SwiftUI
 
 struct WeeklyReminderPickerTester: View {
-    @State private var reminder: Reminder = .weeklyReminder
+    @State private var remimder: Reminder = .weeklyReminder
     
     var body: some View {
-        VStack {
-            WeeklyReminderPicker(reminder: $reminder)
+        NavigationView {
+            Form {
+                WeeklyReminderPicker(reminder: $remimder)
+            }
         }
     }
 }
@@ -24,30 +26,14 @@ struct WeeklyReminderPicker: View {
     var body: some View {
         
         let weekday: Binding<Int> = Binding(
-            get: {
-                print("weekday: Binding get: \(self.reminder.dateComponents.weekday)")
-                return (self.reminder.dateComponents.weekday ?? 1)
-        },
-            set: {
-                print("FIX THIS!!!")
-                print("weekday: Binding set: weekday: \($0)")
-                let calendar = Calendar.current
-                self.reminder.pickerDate = calendar.date(byAdding: .weekday,
-                                                         value: $0,
-                                                         to: self.reminder.pickerDate) ?? Date()
-                //                self.reminder.dateComponents.weekday = $0
-                
-        }
+            get: { self.reminder.weekday ?? -1 },
+            set: { self.reminder.weekday = $0 }
         )
         
         return Group {
-            Text(reminder.description)
-            
-            WeekdayPicker(selected: weekday, shortSymbols: false)
-//                .pickerStyle(WheelPickerStyle())
+            WeekdayPicker(weekday: weekday, shortSymbols: true)
                 .labelsHidden()
-            
-            DatePicker("At a time", selection: $reminder.pickerDate, displayedComponents: .hourAndMinute)
+                .pickerStyle(SegmentedPickerStyle())
         }
     }
 }
@@ -55,5 +41,6 @@ struct WeeklyReminderPicker: View {
 struct WeeklyReminderPicker_Previews: PreviewProvider {
     static var previews: some View {
         WeeklyReminderPickerTester()
+            .environment(\.colorScheme, .dark)
     }
 }

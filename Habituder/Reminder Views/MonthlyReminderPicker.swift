@@ -1,19 +1,19 @@
 //
 //  MonthlyReminderPicker.swift
-//  GoalGetter
+//  Habituder
 //
-//  Created by Igor Malyarov on 28.04.2020.
+//  Created by Igor Malyarov on 02.05.2020.
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 
 import SwiftUI
 
 struct MonthlyReminderPickerTester: View {
-    @State private var reminder: Reminder = .monthlyReminder
+    @State private var remimder: Reminder = .monthlyReminder
     
     var body: some View {
-        VStack {
-            MonthlyReminderPicker(reminder: $reminder)
+        NavigationView {
+            MonthlyReminderPicker(reminder: $remimder)
         }
     }
 }
@@ -24,17 +24,8 @@ struct MonthlyReminderPicker: View {
     var body: some View {
         
         let day: Binding<Int> = Binding(
-            get: {
-                return self.reminder.dateComponents.day ?? 1
-        },
-            set: {
-                print("FIX THIS!!!")
-                let calendar = Calendar.current
-                self.reminder.pickerDate = calendar.date(byAdding: .day,
-                                                         value: $0,
-                                                         to: self.reminder.pickerDate) ?? Date()
-//                self.reminder.dateComponents.day = $0
-        }
+            get: { self.reminder.day ?? -1 },
+            set: { self.reminder.day = $0 }
         )
         
         return VStack(alignment: .leading) {
@@ -54,10 +45,6 @@ struct MonthlyReminderPicker: View {
                         .frame(width: self.monthViewSize(maxWidth: geo.size.width, maxHeight: geo.size.height).width,
                                height: self.monthViewSize(maxWidth: geo.size.width, maxHeight: geo.size.height).height)
                 }
-            }
-            
-            Form {
-                DatePicker("At a time", selection: $reminder.pickerDate, displayedComponents: .hourAndMinute)
             }
         }
     }
@@ -129,12 +116,7 @@ struct MonthView: View {
 
 struct MonthlyReminderPicker_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            //            VStack {
-            MonthlyReminderPickerTester()
-            //                    .border(Color.blue)
-            //            }
-        }
-        //        .environment(\.colorScheme, .dark)
+        MonthlyReminderPickerTester()
+            .environment(\.colorScheme, .dark)
     }
 }
