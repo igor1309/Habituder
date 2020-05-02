@@ -8,13 +8,6 @@
 
 import SwiftUI
 
-struct GoalEditorTester: View {
-    let index = 1
-    var body: some View {
-        GoalEditor(goal: Goal.testingGoals()[index], index: index)
-    }
-}
-
 struct GoalEditor: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var goalStore: GoalStore
@@ -88,6 +81,13 @@ struct GoalEditor: View {
     
     private func update() {
         goalStore.update(goalIndex: index, name: name, note: note, reminder: reminder)
+    }
+}
+
+struct GoalEditorTester: View {
+    let index = 1
+    var body: some View {
+        GoalEditor(goal: Goal.testingGoals()[index], index: index)
     }
 }
 

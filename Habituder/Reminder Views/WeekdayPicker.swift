@@ -8,23 +8,6 @@
 
 import SwiftUI
 
-struct WeekdayPickerTester: View {
-    @State private var weekday: Int = 1
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                Text(Calendar.current.weekdaySymbols[weekday])
-                Text("weekday: \(weekday)")
-                WeekdayPicker(weekday: $weekday, shortSymbols: true)
-                    .pickerStyle(SegmentedPickerStyle())
-                
-                WeekdayPicker(weekday: $weekday, shortSymbols: false)
-            }
-        }
-    }
-}
-
 struct WeekdayPicker: View {
     @Binding var weekday: Int
     
@@ -42,6 +25,23 @@ struct WeekdayPicker: View {
         Picker(selection: $weekday, label: Text("Weekday")) {
             ForEach(weekdaySymbols.indices, id: \.self) { dayIndex in
                 Text(self.weekdaySymbols[dayIndex]).tag(dayIndex)
+            }
+        }
+    }
+}
+
+struct WeekdayPickerTester: View {
+    @State private var weekday: Int = 1
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Text(Calendar.current.weekdaySymbols[weekday])
+                Text("weekday: \(weekday)")
+                WeekdayPicker(weekday: $weekday, shortSymbols: true)
+                    .pickerStyle(SegmentedPickerStyle())
+                
+                WeekdayPicker(weekday: $weekday, shortSymbols: false)
             }
         }
     }

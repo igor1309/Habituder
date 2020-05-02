@@ -8,18 +8,6 @@
 
 import SwiftUI
 
-struct WeeklyReminderPickerTester: View {
-    @State private var remimder: Reminder = .weeklyReminder
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                WeeklyReminderPicker(reminder: $remimder)
-            }
-        }
-    }
-}
-
 struct WeeklyReminderPicker: View {
     @Binding var reminder: Reminder
     
@@ -35,6 +23,18 @@ struct WeeklyReminderPicker: View {
             WeekdayPicker(weekday: weekday, shortSymbols: true)
                 .labelsHidden()
                 .pickerStyle(SegmentedPickerStyle())
+        }
+    }
+}
+
+struct WeeklyReminderPickerTester: View {
+    @State private var remimder: Reminder = .weeklyReminder
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                WeeklyReminderPicker(reminder: $remimder)
+            }
         }
     }
 }

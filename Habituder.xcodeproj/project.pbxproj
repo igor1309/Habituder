@@ -12,13 +12,13 @@
 		2A0BD6D7245CC27D00C27F9B /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0BD6D6245CC27D00C27F9B /* Goal.swift */; };
 		2A0BD6D9245CC4EE00C27F9B /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0BD6D8245CC4EE00C27F9B /* Reminder.swift */; };
 		2A0BD6DB245CC7C200C27F9B /* RepeatPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0BD6DA245CC7C200C27F9B /* RepeatPeriod.swift */; };
-		2A0BD6DD245CD0C900C27F9B /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0BD6DC245CD0C900C27F9B /* GoalDetailView.swift */; };
-		2A2E175C245D974700A57D42 /* DailyReminderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E175B245D974700A57D42 /* DailyReminderPicker.swift */; };
 		2A2E175F245D97D700A57D42 /* WeeklyReminderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E175E245D97D700A57D42 /* WeeklyReminderPicker.swift */; };
 		2A2E1761245D97EB00A57D42 /* MonthlyReminderPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1760245D97EB00A57D42 /* MonthlyReminderPicker.swift */; };
 		2A2E1763245D9D8100A57D42 /* WeekdayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1762245D9D8100A57D42 /* WeekdayPicker.swift */; };
 		2A2E1765245DA90D00A57D42 /* DateComponents+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1764245DA90C00A57D42 /* DateComponents+Ext.swift */; };
 		2A2E1768245DD1AD00A57D42 /* GoalEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */; };
+		2A2E176A245DF4E000A57D42 /* RepeatPeriodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1769245DF4E000A57D42 /* RepeatPeriodPicker.swift */; };
+		2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E176B245DF5A200A57D42 /* MonthView.swift */; };
 		2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */; };
 		2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */; };
 		2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC572245B7AA500BA1AE3 /* ContentView.swift */; };
@@ -34,13 +34,13 @@
 		2A0BD6D6245CC27D00C27F9B /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		2A0BD6D8245CC4EE00C27F9B /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		2A0BD6DA245CC7C200C27F9B /* RepeatPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatPeriod.swift; sourceTree = "<group>"; };
-		2A0BD6DC245CD0C900C27F9B /* GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
-		2A2E175B245D974700A57D42 /* DailyReminderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderPicker.swift; sourceTree = "<group>"; };
 		2A2E175E245D97D700A57D42 /* WeeklyReminderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReminderPicker.swift; sourceTree = "<group>"; };
 		2A2E1760245D97EB00A57D42 /* MonthlyReminderPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReminderPicker.swift; sourceTree = "<group>"; };
 		2A2E1762245D9D8100A57D42 /* WeekdayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayPicker.swift; sourceTree = "<group>"; };
 		2A2E1764245DA90C00A57D42 /* DateComponents+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateComponents+Ext.swift"; sourceTree = "<group>"; };
 		2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEditor.swift; sourceTree = "<group>"; };
+		2A2E1769245DF4E000A57D42 /* RepeatPeriodPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatPeriodPicker.swift; sourceTree = "<group>"; };
+		2A2E176B245DF5A200A57D42 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		2AEEC56B245B7AA500BA1AE3 /* Habituder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habituder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,10 +77,11 @@
 		2A2E175D245D974E00A57D42 /* Reminder Views */ = {
 			isa = PBXGroup;
 			children = (
-				2A2E175B245D974700A57D42 /* DailyReminderPicker.swift */,
+				2A2E1769245DF4E000A57D42 /* RepeatPeriodPicker.swift */,
 				2A2E175E245D97D700A57D42 /* WeeklyReminderPicker.swift */,
 				2A2E1762245D9D8100A57D42 /* WeekdayPicker.swift */,
 				2A2E1760245D97EB00A57D42 /* MonthlyReminderPicker.swift */,
+				2A2E176B245DF5A200A57D42 /* MonthView.swift */,
 			);
 			path = "Reminder Views";
 			sourceTree = "<group>";
@@ -116,7 +117,6 @@
 				2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */,
 				2AEEC572245B7AA500BA1AE3 /* ContentView.swift */,
 				2A0BD6D1245CC22600C27F9B /* GoalListView.swift */,
-				2A0BD6DC245CD0C900C27F9B /* GoalDetailView.swift */,
 				2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */,
 				2A2E1766245DA91800A57D42 /* Extensions */,
 				2A2E175D245D974E00A57D42 /* Reminder Views */,
@@ -215,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A2E175F245D97D700A57D42 /* WeeklyReminderPicker.swift in Sources */,
+				2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */,
 				2A2E1765245DA90D00A57D42 /* DateComponents+Ext.swift in Sources */,
 				2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */,
 				2A0BD6DB245CC7C200C27F9B /* RepeatPeriod.swift in Sources */,
@@ -223,12 +224,11 @@
 				2A0BD6D4245CC23300C27F9B /* GoalStore.swift in Sources */,
 				2A2E1763245D9D8100A57D42 /* WeekdayPicker.swift in Sources */,
 				2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */,
-				2A0BD6DD245CD0C900C27F9B /* GoalDetailView.swift in Sources */,
-				2A2E175C245D974700A57D42 /* DailyReminderPicker.swift in Sources */,
 				2A2E1761245D97EB00A57D42 /* MonthlyReminderPicker.swift in Sources */,
 				2A2E1768245DD1AD00A57D42 /* GoalEditor.swift in Sources */,
 				2A0BD6D7245CC27D00C27F9B /* Goal.swift in Sources */,
 				2A0BD6D2245CC22600C27F9B /* GoalListView.swift in Sources */,
+				2A2E176A245DF4E000A57D42 /* RepeatPeriodPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +373,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photoigor.Habituder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -393,6 +394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photoigor.Habituder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
