@@ -113,8 +113,13 @@ extension Reminder {
 }
 
 extension Reminder {
-    static let dailyReminder = Reminder(repeatPeriod: .daily, hour: 9, minute: 17)
-    static let weeklyReminder = Reminder(repeatPeriod: .weekly, hour: 9, minute: 17, weekday: 4)
-    static let monthlyReminder = Reminder(repeatPeriod: .monthly, day: 3, hour: 9, minute: 17)
+    static let dailyReminder   = Reminder(repeatPeriod: .daily,
+                                          hour: 9, minute: 17)
+    static let weeklyReminder  = Reminder(repeatPeriod: .weekly,
+                                          hour: 9, minute: 17,
+                                          weekday: 4)
+    static let monthlyReminder = Reminder(repeatPeriod: .monthly,
+                                          day: 3,
+                                          hour: 9, minute: 17)
 }
 

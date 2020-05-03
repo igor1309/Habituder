@@ -101,6 +101,10 @@ struct GoalEditor: View {
                 Section(header: Text("Pending Notifications".uppercased())
                 ) {
                     HStack {
+                        Text(goalNotifications.pendingNotifications)
+                            .foregroundColor(goalNotifications.color)
+                            .font(goalNotifications.font)
+                        
                         if goalNotifications.isEmpty != nil {
                             if goalNotifications.isEmpty! {
                                 Button("FIX") {
@@ -109,10 +113,6 @@ struct GoalEditor: View {
                                 Spacer()
                             }
                         }
-                        
-                        Text(goalNotifications.pendingNotifications)
-                            .foregroundColor(goalNotifications.color)
-                            .font(goalNotifications.font)
                     }
                     
                     NotificationSettingsView()
