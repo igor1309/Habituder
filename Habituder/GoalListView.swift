@@ -11,6 +11,9 @@ import SwiftPI
 
 struct GoalListView: View {
     @EnvironmentObject var goalStore: GoalStore
+    @ObservedObject var notificationStore = NotificationStore()
+    
+    var haveIssues: Bool { return goalStore.goals.count != notificationStore.qty }
     
     @State private var showNotifications = false
     @State private var showEditor = false
@@ -18,19 +21,19 @@ struct GoalListView: View {
     
     private func goalRow(goal: Goal) -> some View {
         let index = goalStore.goals.firstIndex(of: goal)!
-
+        
         return VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
                 Text(goal.name)
                     .foregroundColor(.systemOrange)
-
+                
                 Spacer()
-
+                
                 Text(goal.reminder.description)
                     .foregroundColor(.tertiary)
                     .font(.caption)
             }
-
+            
             Text(goal.note)
                 .foregroundColor(.secondary)
                 .font(.subheadline)
@@ -69,9 +72,10 @@ struct GoalListView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
-                TrailingButtonSFSymbol("bell") {
+                TrailingButtonSFSymbol(haveIssues ? "bell.fill" : "bell") {
                     self.showNotifications = true
                 }
+                .foregroundColor(haveIssues ? .systemRed : .accentColor)
                 .sheet(isPresented: $showNotifications) {
                     AllNotificationsView()
                         .environmentObject(self.goalStore)
@@ -110,8 +114,10 @@ struct GoalListView: View {
 
 struct GoalListView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalListView()
-            .environmentObject(GoalStore())
-            .environment(\.colorScheme, .dark)
+        NavigationView {
+            GoalListView()
+        }
+        .environmentObject(GoalStore())
+        .environment(\.colorScheme, .dark)
     }
 }

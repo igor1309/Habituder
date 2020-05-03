@@ -26,6 +26,7 @@
 		2A2E1777245E380800A57D42 /* GoalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1776245E380800A57D42 /* GoalNotifications.swift */; };
 		2A2E1779245EE54D00A57D42 /* AllNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */; };
 		2A2E177B245EFB6600A57D42 /* GoalListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E177A245EFB6600A57D42 /* GoalListRow.swift */; };
+		2A842422245F02930002EDB9 /* NotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A842421245F02930002EDB9 /* NotificationStore.swift */; };
 		2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */; };
 		2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */; };
 		2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC572245B7AA500BA1AE3 /* ContentView.swift */; };
@@ -55,6 +56,7 @@
 		2A2E1776245E380800A57D42 /* GoalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalNotifications.swift; sourceTree = "<group>"; };
 		2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotificationsView.swift; sourceTree = "<group>"; };
 		2A2E177A245EFB6600A57D42 /* GoalListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListRow.swift; sourceTree = "<group>"; };
+		2A842421245F02930002EDB9 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStore.swift; sourceTree = "<group>"; };
 		2AEEC56B245B7AA500BA1AE3 /* Habituder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habituder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		2A0BD6D5245CC23800C27F9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2A842421245F02930002EDB9 /* NotificationStore.swift */,
 				2A2E1774245E32F500A57D42 /* NotificationSettings.swift */,
 				2A2E1776245E380800A57D42 /* GoalNotifications.swift */,
 				2A0BD6D3245CC23300C27F9B /* GoalStore.swift */,
@@ -255,6 +258,7 @@
 				2A2E175F245D97D700A57D42 /* WeeklyReminderPicker.swift in Sources */,
 				2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */,
 				2A2E1777245E380800A57D42 /* GoalNotifications.swift in Sources */,
+				2A842422245F02930002EDB9 /* NotificationStore.swift in Sources */,
 				2A2E1765245DA90D00A57D42 /* DateComponents+Ext.swift in Sources */,
 				2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */,
 				2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */,
@@ -409,7 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Habituder/Preview Content\"";
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
@@ -431,7 +435,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Habituder/Preview Content\"";
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;

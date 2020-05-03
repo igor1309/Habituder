@@ -32,9 +32,6 @@ final class GoalNotifications: ObservableObject {
     
     init(identifier: String) {
         self.pendingNotifications = ""
-//        self.isEmpty = false
-        
-        print(">>>>>>>>>>>>>>>>> running GoalNotifications init")
         
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(for: identifier)
@@ -71,15 +68,6 @@ final class GoalNotifications: ObservableObject {
 
 extension UNUserNotificationCenter {
     /// like in https://www.donnywals.com/using-promises-and-futures-in-combine/
-    func getPendingNotificationRequests() -> Future<[UNNotificationRequest], Never> {
-        return Future { promise in
-            self.getPendingNotificationRequests { requests in
-                promise(.success(requests))
-            }
-        }
-    }
-    
-    /// like in https://www.donnywals.com/using-promises-and-futures-in-combine/
     func getPendingNotificationRequests(for identifier: String) -> Future<[UNNotificationRequest], Never> {
         return Future { promise in
             self.getPendingNotificationRequests { requests in
@@ -88,4 +76,3 @@ extension UNUserNotificationCenter {
         }
     }
 }
-

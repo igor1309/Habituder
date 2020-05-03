@@ -9,6 +9,7 @@
 import SwiftUI
 
 /// НЕ ИСПОЛЬЗУЕТСЯ ТАК КАК ПРИВОДИТ К ПОСТОЯННОЙ ИНИЦИАЛИЗАЦИИ GoalNotifications — и при создании списка и при вызове Detail View
+/// НО ЭТОТ ПОДХОД ИСПОЛЬЗУЕТСЯ В NotificationRow
 struct GoalListRow: View {
     @EnvironmentObject var goalStore: GoalStore
     
