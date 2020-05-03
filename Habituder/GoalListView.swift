@@ -33,6 +33,10 @@ struct GoalListView: View {
             Text(goal.note)
                 .foregroundColor(.secondary)
                 .font(.footnote)
+            
+            Text("goal id \(goal.id.uuidString)")
+                .foregroundColor(.tertiary)
+                .font(.caption)
         }
         .contentShape(Rectangle())
         .onTapGesture {

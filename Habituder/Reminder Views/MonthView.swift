@@ -16,7 +16,7 @@ struct MonthView: View {
     private func cell(row: Int, col: Int, cellSize: CGFloat) -> some View {
         let day = row * 7 + col
         
-        let calendar = Calendar.autoupdatingCurrent
+        let calendar = Calendar.current
         let timeZone = TimeZone.autoupdatingCurrent
         let today = calendar.dateComponents(in: timeZone, from:Date()).day!
         

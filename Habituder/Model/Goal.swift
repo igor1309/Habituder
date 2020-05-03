@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 struct Goal: Identifiable, Codable {
     var id = UUID()
@@ -17,11 +18,64 @@ struct Goal: Identifiable, Codable {
     var reminder: Reminder
 }
 
+/// Notification handling
 extension Goal {
+    private var request: UNNotificationRequest {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: reminder.dateComponents, repeats: true)
+        
+        let content = UNMutableNotificationContent()
+        content.title = "\(name)"
+        content.body = "\(note)\n(\(reminder.description))"
+        
+        ///  The request combines the content and trigger, but also adds a unique identifier so you can edit or remove specific alerts later on. If you don’t want to edit or remove stuff, use UUID().uuidString to get a random identifier.
+        //  let randomIdentifier = UUID().uuidString
+        /// using Goal.id as identifier
+        let identifier = id.uuidString
+        
+        return UNNotificationRequest(identifier: identifier/*randomIdentifier*/, content: content, trigger: trigger)
+    }
+    
     func createNotification() {
-        //  MARK: FINISH THIS
-        //
-        print("func createNotification() TBD")
+        let center = UNUserNotificationCenter.current()
+        
+        /// delete previous notifications with ID
+        center.removePendingNotificationRequests(withIdentifiers: [self.request.identifier])
+        
+        /// add new notification
+        center.add(self.request) { error in
+            if error == nil {
+                print("notification with ID \(self.request.identifier) added (ok)")
+            } else {
+                print("something went wrong with adding notification request")
+            }
+        }
+    }
+    
+    /// `Не уверен`, что в этом конкретном случае создания напоминания необходимо запрашивать настройки — ведь если notifications не разрешены, то add(request) просто выдаст ошибку. НО: `Apple`: Always check your app’s authorization status before scheduling local notifications. Users can change your app’s authorization settings at any time. They can also change the type of interactions allowed by your app—which may cause you to alter the number or type of notifications your app sends.
+    /// поэтому сохраняю эту версию функции
+    func createNotificationOLD() {
+        let center = UNUserNotificationCenter.current()
+        
+        center.getNotificationSettings { settings in
+            
+            guard settings.authorizationStatus == .authorized
+                || settings.authorizationStatus == .provisional else {
+                    print("notifications are not allowed")
+                    return
+            }
+            
+            /// delete previous notifications with ID
+            center.removePendingNotificationRequests(withIdentifiers: [self.request.identifier])
+            
+            /// add new notification
+            center.add(self.request) { error in
+                if error == nil {
+                    print("notification with ID \(self.request.identifier) added (ok)")
+                } else {
+                    print("something went wrong with adding notification request")
+                }
+            }
+        }
     }
 }
 

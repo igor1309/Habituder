@@ -35,8 +35,7 @@ struct Reminder: Codable {
         
         self.repeatPeriod = repeatPeriod
         
-        let dateComponents = DateComponents(hour: hour,
-                                            minute: minute)
+        let dateComponents = DateComponents(hour: hour, minute: minute)
         let calendar = Calendar.current
         let date = calendar.date(from: dateComponents)
         self.pickerTime = date!
@@ -60,14 +59,14 @@ extension Reminder {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
         
-        let calendar = Calendar.autoupdatingCurrent
-        let timeComponents = calendar.dateComponents([.hour, .minute], from: pickerTime)
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: pickerTime)
         
-        guard let timeString = formatter.string(from: timeComponents) else {
+        guard let timeString = formatter.string(from: components) else {
             return "unable to process reminder"
         }
         
-        let timeStr = timeComponents.hour == 0 ? "00:" + timeString : timeString
+        let timeStr = components.hour == 0 ? "00:" + timeString : timeString
         
         switch self.repeatPeriod {
         case .daily:
@@ -92,6 +91,24 @@ extension Reminder {
             guard day != nil else { return "error: day in reminder is nil" }
             return "Every month on \(day!)th"
         }
+    }
+    
+    var dateComponents: DateComponents {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.hour, .minute], from: pickerTime)
+        
+        switch self.repeatPeriod {
+        case .daily:
+            break
+        case .weekly:
+            guard weekday != nil else { fatalError("error: weekday in reminder is nil") }
+            components.weekday = weekday!
+        case .monthly:
+            guard day != nil else { fatalError("error: day in reminder is nil") }
+            components.day = day!
+        }
+        
+        return components
     }
 }
 

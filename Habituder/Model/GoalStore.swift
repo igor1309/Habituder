@@ -43,7 +43,7 @@ extension GoalStore {
         goals[index] = newValue
         save()
         
-        goals[0].createNotification()
+        goals[index].createNotification()
     }
     
     func update(goalIndex: Int, name: String, note: String, reminder: Reminder) {
@@ -53,7 +53,7 @@ extension GoalStore {
         goals[goalIndex].reminder = reminder
         save()
         
-        goals[0].createNotification()
+        goals[goalIndex].createNotification()
     }
     
     func appendTestingStore() {
@@ -72,6 +72,7 @@ extension GoalStore {
         
         //MARK: NOTIFICATIONS!!!!!!!
         //
+        
         let empty = Goal(name: "<New Goal>",
                          note: "<Goal Note>",
                          reminder: Reminder(repeatPeriod: .daily,
@@ -84,6 +85,9 @@ extension GoalStore {
     }
     
     func remove(goal: Goal) {
+        //MARK: NOTIFICATIONS!!!!!!!
+        //
+        
         goals.removeAll { $0.id == goal.id }
         save()
     }
@@ -94,6 +98,7 @@ extension GoalStore {
     }
     
     func delete(at offsets: IndexSet) {
+        
         //MARK: NOTIFICATIONS!!!!!!!
         //
         goals.remove(atOffsets: offsets)

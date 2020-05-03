@@ -14,7 +14,7 @@ enum PartOfDay: String, Codable, CaseIterable, Hashable {
     var id: String { rawValue.capitalized }
     
     var time: Date {
-        let calendar = Calendar.autoupdatingCurrent
+        let calendar = Calendar.current
         var dateComponents = DateComponents()
         
         switch self {

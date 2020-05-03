@@ -7,10 +7,14 @@
 //
 
 import SwiftUI
+import Combine
+import UserNotifications
 
 struct GoalEditor: View {
     @Environment(\.presentationMode) var presentation
     @EnvironmentObject var goalStore: GoalStore
+    
+    @ObservedObject var goalNotifications: GoalNotifications
     
     var index: Int
     
@@ -23,6 +27,7 @@ struct GoalEditor: View {
         self._note = State(initialValue: goal.note)
         self._reminder = State(initialValue: goal.reminder)
         self.index = index
+        self.goalNotifications = GoalNotifications(identifier: goal.id.uuidString)
     }
     
     @State private var partOfDay: PartOfDay = .morning
@@ -93,6 +98,20 @@ struct GoalEditor: View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                 }
+                
+                Section(header: Text("Pending Notifications".uppercased())) {
+                    Text(goalNotifications.pendingNotifications)
+                        .foregroundColor(goalNotifications.isEmpty ? .systemRed : .secondary)
+                        .font(goalNotifications.isEmpty ? .body : .caption)
+                    
+                    if goalNotifications.isEmpty {
+                        Button("TBD: FIX: Schedule Notification") {
+                            self.scheduleNotification()
+                        }
+                    }
+                    
+                    NotificationSettingsView()
+                }
             }
             .navigationBarTitle(name)
             .navigationBarItems(trailing: Button("Done") {
@@ -104,6 +123,12 @@ struct GoalEditor: View {
     
     private func update() {
         goalStore.update(goalIndex: index, name: name, note: note, reminder: reminder)
+    }
+    
+    private func scheduleNotification() {
+        //  MARK :FINISH THIS
+        //
+        
     }
 }
 
