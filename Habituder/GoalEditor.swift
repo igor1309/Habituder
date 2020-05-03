@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import Combine
-import UserNotifications
 
 struct GoalEditor: View {
     @Environment(\.presentationMode) var presentation
@@ -27,7 +25,7 @@ struct GoalEditor: View {
         self._note = State(initialValue: goal.note)
         self._reminder = State(initialValue: goal.reminder)
         self.index = index
-        self.goalNotifications = GoalNotifications(identifier: goal.id.uuidString)
+        self.goalNotifications = GoalNotifications(identifier: goal.identifier)
     }
     
     @State private var partOfDay: PartOfDay = .morning
@@ -51,13 +49,6 @@ struct GoalEditor: View {
                 )
             }
         }
-        
-        let dayPart: Binding<PartOfDay> = Binding(
-            get: { self.partOfDay },
-            set: {
-                self.partOfDay = $0
-                self.reminder.pickerTime = self.partOfDay.time
-        })
         
         return NavigationView {
             Form {
@@ -85,29 +76,43 @@ struct GoalEditor: View {
                                selection: $reminder.pickerTime,
                                displayedComponents: .hourAndMinute)
                     
-                    VStack(alignment: .leading) {
-                        Text("Quick Time")
+                    HStack {
+                        Text("Quick Time:")
                             .foregroundColor(.secondary)
-                            .font(.footnote)
                         
-                        Picker("Part of the Day", selection: dayPart) {
-                            ForEach(PartOfDay.allCases, id: \.self) { part in
-                                Text(part.id).tag(part)
+                        ForEach(PartOfDay.allCases, id: \.self) { part in
+                            Group {
+                                Spacer()
+                                
+                                Text(part.id)
+                                    .foregroundColor(.accentColor)
+                                    .onTapGesture {
+                                        //  MARK: ADD LIGHT HAPTIC
+                                        //
+                                        
+                                        self.reminder.pickerTime = part.time
+                                }
                             }
                         }
-                        .pickerStyle(SegmentedPickerStyle())
                     }
+                    .font(.subheadline)
                 }
                 
-                Section(header: Text("Pending Notifications".uppercased())) {
-                    Text(goalNotifications.pendingNotifications)
-                        .foregroundColor(goalNotifications.isEmpty ? .systemRed : .secondary)
-                        .font(goalNotifications.isEmpty ? .body : .caption)
-                    
-                    if goalNotifications.isEmpty {
-                        Button("TBD: FIX: Schedule Notification") {
-                            self.scheduleNotification()
+                Section(header: Text("Pending Notifications".uppercased())
+                ) {
+                    HStack {
+                        if goalNotifications.isEmpty != nil {
+                            if goalNotifications.isEmpty! {
+                                Button("FIX") {
+                                    self.fixNotification()
+                                }
+                                Spacer()
+                            }
                         }
+                        
+                        Text(goalNotifications.pendingNotifications)
+                            .foregroundColor(goalNotifications.color)
+                            .font(goalNotifications.font)
                     }
                     
                     NotificationSettingsView()
@@ -125,10 +130,8 @@ struct GoalEditor: View {
         goalStore.update(goalIndex: index, name: name, note: note, reminder: reminder)
     }
     
-    private func scheduleNotification() {
-        //  MARK :FINISH THIS
-        //
-        
+    private func fixNotification() {
+        self.update()
     }
 }
 

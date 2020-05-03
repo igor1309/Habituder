@@ -13,7 +13,7 @@ import Combine
 
 final class NotificationSettings: ObservableObject {
     
-    @Published var hasPermissions: Bool = false
+    @Published var hasPermissions: Bool = true
     
     var permisionsNote: String? {
         if hasPermissions {

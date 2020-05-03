@@ -7,19 +7,34 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 import UserNotifications
 
 final class GoalNotifications: ObservableObject {
     
     @Published var pendingNotifications: String
-    @Published var isEmpty: Bool
+    @Published var isEmpty: Bool?
+    
+    var color: Color {
+        isEmpty == nil
+            ? .clear
+            : isEmpty! ? .systemRed : .secondary
+    }
+    
+    var font: Font {
+        isEmpty == nil
+            ? .body
+            : isEmpty! ? .body : .caption
+    }
     
     private enum PendingRequestsError: Error { case empty }
     
     init(identifier: String) {
         self.pendingNotifications = ""
-        self.isEmpty = true
+//        self.isEmpty = false
+        
+        print(">>>>>>>>>>>>>>>>> running GoalNotifications init")
         
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(for: identifier)
@@ -40,7 +55,7 @@ final class GoalNotifications: ObservableObject {
                 self.isEmpty = false
             }
         }, receiveValue: {
-            self.pendingNotifications = ListFormatter.localizedString(byJoining: $0)
+            self.pendingNotifications = "reminder registered\ntrigger(s): " + ListFormatter.localizedString(byJoining: $0)
         })
             .store(in: &cancellables)
     }

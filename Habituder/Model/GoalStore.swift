@@ -66,28 +66,18 @@ extension GoalStore {
     }
 
     func createNew() {
-        //  MARK: hack to make Published work with didSet in array
-        //  https://forums.developer.apple.com/thread/130692
-        //        goalStore.goals = [Goal.empty] + goalStore.goals
-        
-        //MARK: NOTIFICATIONS!!!!!!!
-        //
-        
         let empty = Goal(name: "<New Goal>",
                          note: "<Goal Note>",
                          reminder: Reminder(repeatPeriod: .daily,
                                             hour: 9,
                                             minute: 17))
         goals.insert(empty, at: 0)
-        save()
-        
         goals[0].createNotification()
+        save()
     }
     
     func remove(goal: Goal) {
-        //MARK: NOTIFICATIONS!!!!!!!
-        //
-        
+        goal.deleteNotification()
         goals.removeAll { $0.id == goal.id }
         save()
     }
@@ -98,9 +88,10 @@ extension GoalStore {
     }
     
     func delete(at offsets: IndexSet) {
+        for ix in offsets {
+            goals[ix].deleteNotification()
+        }
         
-        //MARK: NOTIFICATIONS!!!!!!!
-        //
         goals.remove(atOffsets: offsets)
         save()
     }

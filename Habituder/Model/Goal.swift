@@ -20,6 +20,8 @@ struct Goal: Identifiable, Codable {
 
 /// Notification handling
 extension Goal {
+    var identifier: String { id.uuidString }
+    
     private var request: UNNotificationRequest {
         let trigger = UNCalendarNotificationTrigger(dateMatching: reminder.dateComponents, repeats: true)
         
@@ -30,9 +32,14 @@ extension Goal {
         ///  The request combines the content and trigger, but also adds a unique identifier so you can edit or remove specific alerts later on. If you don’t want to edit or remove stuff, use UUID().uuidString to get a random identifier.
         //  let randomIdentifier = UUID().uuidString
         /// using Goal.id as identifier
-        let identifier = id.uuidString
-        
         return UNNotificationRequest(identifier: identifier/*randomIdentifier*/, content: content, trigger: trigger)
+    }
+    
+    func deleteNotification() {
+        let center = UNUserNotificationCenter.current()
+        
+        /// delete previous notifications with ID
+        center.removePendingNotificationRequests(withIdentifiers: [self.request.identifier])
     }
     
     func createNotification() {
@@ -40,7 +47,7 @@ extension Goal {
         
         /// delete previous notifications with ID
         center.removePendingNotificationRequests(withIdentifiers: [self.request.identifier])
-        
+
         /// add new notification
         center.add(self.request) { error in
             if error == nil {

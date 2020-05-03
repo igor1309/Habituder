@@ -12,35 +12,32 @@ import SwiftPI
 struct GoalListView: View {
     @EnvironmentObject var goalStore: GoalStore
     
+    @State private var showNotifications = false
     @State private var showEditor = false
-    @State private var index: Int = 0
+    @State private var selected: Int = 0
     
     private func goalRow(goal: Goal) -> some View {
         let index = goalStore.goals.firstIndex(of: goal)!
-        
+
         return VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
                 Text(goal.name)
                     .foregroundColor(.systemOrange)
-                
+
                 Spacer()
-                
+
                 Text(goal.reminder.description)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.tertiary)
                     .font(.caption)
             }
-            
+
             Text(goal.note)
                 .foregroundColor(.secondary)
-                .font(.footnote)
-            
-            Text("goal id \(goal.id.uuidString)")
-                .foregroundColor(.tertiary)
-                .font(.caption)
+                .font(.subheadline)
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            self.index = index
+            self.selected = index
             self.showEditor = true
         }
     }
@@ -48,6 +45,8 @@ struct GoalListView: View {
     var body: some View {
         List {
             ForEach(goalStore.goals) { goal in
+                
+                //  GoalListRow(goal: goal, selected: self.$selected, showEditor: self.$showEditor)
                 self.goalRow(goal: goal)
                     .contextMenu {
                         Button(action: {
@@ -62,7 +61,7 @@ struct GoalListView: View {
             .onDelete(perform: delete)
         }
         .sheet(isPresented: $showEditor) {
-            GoalEditor(goal: self.goalStore.goals[self.index], index: self.index)
+            GoalEditor(goal: self.goalStore.goals[self.selected], index: self.selected)
                 //    GoalDetailView(goal: self.goalStore.goals[self.index], index: self.index)
                 .environmentObject(self.goalStore)
         }
@@ -70,6 +69,13 @@ struct GoalListView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
+                TrailingButtonSFSymbol("bell") {
+                    self.showNotifications = true
+                }
+                .sheet(isPresented: $showNotifications) {
+                    AllNotificationsView()
+                        .environmentObject(self.goalStore)
+                }
                 TrailingButtonSFSymbol("text.badge.plus") {
                     self.appendTestingStore()
                 }
