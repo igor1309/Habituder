@@ -26,7 +26,10 @@
 		2A2E1777245E380800A57D42 /* GoalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1776245E380800A57D42 /* GoalNotifications.swift */; };
 		2A2E1779245EE54D00A57D42 /* AllNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */; };
 		2A2E177B245EFB6600A57D42 /* GoalListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E177A245EFB6600A57D42 /* GoalListRow.swift */; };
-		2A842422245F02930002EDB9 /* NotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A842421245F02930002EDB9 /* NotificationStore.swift */; };
+		2A842422245F02930002EDB9 /* OLDNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A842421245F02930002EDB9 /* OLDNotificationStore.swift */; };
+		2A842424245F61A90002EDB9 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A842423245F61A90002EDB9 /* NotificationManager.swift */; };
+		2A842427246048800002EDB9 /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A842426246048800002EDB9 /* NotificationRow.swift */; };
+		2AA81B8F2460C0D500281103 /* testingGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81B8E2460C0D500281103 /* testingGoals.swift */; };
 		2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */; };
 		2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */; };
 		2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC572245B7AA500BA1AE3 /* ContentView.swift */; };
@@ -56,7 +59,10 @@
 		2A2E1776245E380800A57D42 /* GoalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalNotifications.swift; sourceTree = "<group>"; };
 		2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotificationsView.swift; sourceTree = "<group>"; };
 		2A2E177A245EFB6600A57D42 /* GoalListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListRow.swift; sourceTree = "<group>"; };
-		2A842421245F02930002EDB9 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStore.swift; sourceTree = "<group>"; };
+		2A842421245F02930002EDB9 /* OLDNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDNotificationStore.swift; sourceTree = "<group>"; };
+		2A842423245F61A90002EDB9 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		2A842426246048800002EDB9 /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
+		2AA81B8E2460C0D500281103 /* testingGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingGoals.swift; sourceTree = "<group>"; };
 		2AEEC56B245B7AA500BA1AE3 /* Habituder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habituder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,11 +88,12 @@
 		2A0BD6D5245CC23800C27F9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2A842421245F02930002EDB9 /* NotificationStore.swift */,
+				2A842423245F61A90002EDB9 /* NotificationManager.swift */,
 				2A2E1774245E32F500A57D42 /* NotificationSettings.swift */,
 				2A2E1776245E380800A57D42 /* GoalNotifications.swift */,
 				2A0BD6D3245CC23300C27F9B /* GoalStore.swift */,
 				2A0BD6D6245CC27D00C27F9B /* Goal.swift */,
+				2AA81B8E2460C0D500281103 /* testingGoals.swift */,
 				2A0BD6D8245CC4EE00C27F9B /* Reminder.swift */,
 				2A0BD6DA245CC7C200C27F9B /* RepeatPeriod.swift */,
 				2A2E176D245E049200A57D42 /* PartOfDay.swift */,
@@ -130,6 +137,24 @@
 			path = TESTING;
 			sourceTree = "<group>";
 		};
+		2A842425246048690002EDB9 /* Notifications Views */ = {
+			isa = PBXGroup;
+			children = (
+				2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */,
+				2A842426246048800002EDB9 /* NotificationRow.swift */,
+				2A2E1772245E24C400A57D42 /* NotificationSettingsView.swift */,
+			);
+			path = "Notifications Views";
+			sourceTree = "<group>";
+		};
+		2A842428246070B50002EDB9 /* OLD STUFF */ = {
+			isa = PBXGroup;
+			children = (
+				2A842421245F02930002EDB9 /* OLDNotificationStore.swift */,
+			);
+			path = "OLD STUFF";
+			sourceTree = "<group>";
+		};
 		2AEEC562245B7AA500BA1AE3 = {
 			isa = PBXGroup;
 			children = (
@@ -154,13 +179,13 @@
 				2AEEC572245B7AA500BA1AE3 /* ContentView.swift */,
 				2A0BD6D1245CC22600C27F9B /* GoalListView.swift */,
 				2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */,
-				2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */,
-				2A2E1772245E24C400A57D42 /* NotificationSettingsView.swift */,
+				2A842425246048690002EDB9 /* Notifications Views */,
 				2A842420245EFC210002EDB9 /* TESTING */,
 				2A2E1771245E0F7200A57D42 /* TODO */,
 				2A2E1766245DA91800A57D42 /* Extensions */,
 				2A2E175D245D974E00A57D42 /* Reminder Views */,
 				2A0BD6D5245CC23800C27F9B /* Model */,
+				2A842428246070B50002EDB9 /* OLD STUFF */,
 				2AEEC574245B7AA600BA1AE3 /* Assets.xcassets */,
 				2AEEC579245B7AA600BA1AE3 /* LaunchScreen.storyboard */,
 				2AEEC57C245B7AA600BA1AE3 /* Info.plist */,
@@ -258,9 +283,10 @@
 				2A2E175F245D97D700A57D42 /* WeeklyReminderPicker.swift in Sources */,
 				2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */,
 				2A2E1777245E380800A57D42 /* GoalNotifications.swift in Sources */,
-				2A842422245F02930002EDB9 /* NotificationStore.swift in Sources */,
+				2A842422245F02930002EDB9 /* OLDNotificationStore.swift in Sources */,
 				2A2E1765245DA90D00A57D42 /* DateComponents+Ext.swift in Sources */,
 				2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */,
+				2A842424245F61A90002EDB9 /* NotificationManager.swift in Sources */,
 				2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */,
 				2A0BD6DB245CC7C200C27F9B /* RepeatPeriod.swift in Sources */,
 				2A0BD6D9245CC4EE00C27F9B /* Reminder.swift in Sources */,
@@ -268,6 +294,7 @@
 				2A0BD6D4245CC23300C27F9B /* GoalStore.swift in Sources */,
 				2A2E1770245E0D4300A57D42 /* PartOfDaySettingsView.swift in Sources */,
 				2A2E1779245EE54D00A57D42 /* AllNotificationsView.swift in Sources */,
+				2A842427246048800002EDB9 /* NotificationRow.swift in Sources */,
 				2A2E1763245D9D8100A57D42 /* WeekdayPicker.swift in Sources */,
 				2A2E1773245E24C400A57D42 /* NotificationSettingsView.swift in Sources */,
 				2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */,
@@ -275,6 +302,7 @@
 				2A2E177B245EFB6600A57D42 /* GoalListRow.swift in Sources */,
 				2A2E1768245DD1AD00A57D42 /* GoalEditor.swift in Sources */,
 				2A0BD6D7245CC27D00C27F9B /* Goal.swift in Sources */,
+				2AA81B8F2460C0D500281103 /* testingGoals.swift in Sources */,
 				2A0BD6D2245CC22600C27F9B /* GoalListView.swift in Sources */,
 				2A2E176A245DF4E000A57D42 /* RepeatPeriodPicker.swift in Sources */,
 			);

@@ -11,7 +11,13 @@ import SwiftUI
 import UserNotifications
 import Combine
 
-final class NotificationStore: ObservableObject {
+//  ---------------------------------------------------------------
+//
+//  this class is not used but saved as an example of using Combine
+//
+//  ---------------------------------------------------------------
+
+final class OLDNotificationStore: ObservableObject {
     @Published var qty: Int = 0
     
     init() {
@@ -24,6 +30,12 @@ final class NotificationStore: ObservableObject {
         .store(in: &cancellables)
     }
     
+    func removeAll() {
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        center.removeAllDeliveredNotifications()
+    }
+    
     private var cancellables = Set<AnyCancellable>()
     
     deinit {
@@ -32,15 +44,3 @@ final class NotificationStore: ObservableObject {
         }
     }
 }
-
-extension UNUserNotificationCenter {
-    /// like in https://www.donnywals.com/using-promises-and-futures-in-combine/
-    func getPendingNotificationRequests() -> Future<[UNNotificationRequest], Never> {
-        return Future { promise in
-            self.getPendingNotificationRequests { requests in
-                promise(.success(requests))
-            }
-        }
-    }
-}
-

@@ -11,9 +11,6 @@ import SwiftPI
 
 struct GoalListView: View {
     @EnvironmentObject var goalStore: GoalStore
-    @ObservedObject var notificationStore = NotificationStore()
-    
-    var haveIssues: Bool { return goalStore.goals.count != notificationStore.qty }
     
     @State private var showNotifications = false
     @State private var showEditor = false
@@ -65,19 +62,28 @@ struct GoalListView: View {
         }
         .sheet(isPresented: $showEditor) {
             GoalEditor(goal: self.goalStore.goals[self.selected], index: self.selected)
-                //    GoalDetailView(goal: self.goalStore.goals[self.index], index: self.index)
                 .environmentObject(self.goalStore)
+        }
+        .onAppear {
+            DispatchQueue.main.async {//After(deadline: .now() + 1) {
+                if self.goalStore.anyIssues {
+                    print("have issues")
+                } else {
+                    print("no issues")
+                }
+            }
         }
         .navigationBarTitle("Goals", displayMode: .automatic)
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
-                TrailingButtonSFSymbol(haveIssues ? "bell.fill" : "bell.circle") {
+                TrailingButtonSFSymbol(goalStore.anyIssues ? "bell.fill" : "bell.circle") {
                     self.showNotifications = true
                 }
-                .foregroundColor(haveIssues ? .systemRed : .accentColor)
+                .foregroundColor(goalStore.anyIssues ? .systemRed : .accentColor)
                 .sheet(isPresented: $showNotifications) {
-                    AllNotificationsView()
+//                Text("test")
+                        AllNotificationsView()
                         .environmentObject(self.goalStore)
                 }
                 TrailingButtonSFSymbol("text.badge.plus") {
@@ -96,6 +102,8 @@ struct GoalListView: View {
     
     func createNew() {
         goalStore.createNew()
+        selected = 0
+        showEditor = true
     }
     
     private func remove(goal: Goal) {

@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let contentView = ContentView()
             .environmentObject(GoalStore())
             .environmentObject(NotificationSettings())
-        
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

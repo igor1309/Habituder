@@ -50,6 +50,22 @@ struct GoalEditor: View {
             }
         }
         
+        func smallButtonLabel(title: String, fillColor: Color) -> some View {
+            Text(title)
+                .foregroundColor(.accentColor)
+                .fontWeight(.semibold)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 8)
+                .background(
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .fill(fillColor)
+            )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .stroke(Color.tertiarySystemFill)
+            )
+        }
+        
         return NavigationView {
             Form {
                 Section(header: Text("Details".uppercased())
@@ -77,25 +93,40 @@ struct GoalEditor: View {
                                displayedComponents: .hourAndMinute)
                     
                     HStack {
-                        Text("Quick Time:")
-                            .foregroundColor(.secondary)
+                        //                            Text("Quick Time:")
+                        //                                .foregroundColor(.secondary)
+                        
+                        //                            Spacer()
                         
                         ForEach(PartOfDay.allCases, id: \.self) { part in
                             Group {
-                                Spacer()
-                                
-                                Text(part.id)
-                                    .foregroundColor(.accentColor)
+                                smallButtonLabel(title: part.id, fillColor: self.reminder.pickerTime == part.time ? Color.quaternarySystemFill : .clear)
                                     .onTapGesture {
                                         //  MARK: ADD LIGHT HAPTIC
                                         //
                                         
                                         self.reminder.pickerTime = part.time
                                 }
+                                
+                                Spacer()
                             }
                         }
+                        
+                        smallButtonLabel(title: "Now*", fillColor: .clear)
+                            .onTapGesture {
+                                //  MARK: ADD LIGHT HAPTIC
+                                //
+                                withAnimation {
+                                    let date = Date()
+                                    let calendar = Calendar.current
+                                    let hour = calendar.component(.hour, from: date)
+                                    let minute = calendar.component(.minute, from: date) + 1
+                                    let components = DateComponents(hour: hour, minute: minute)
+                                    self.reminder.pickerTime = calendar.date(from: components)!
+                                }
+                        }
                     }
-                    .font(.subheadline)
+                    .font(.footnote)
                 }
                 
                 Section(header: Text("Pending Notifications".uppercased())
@@ -107,10 +138,11 @@ struct GoalEditor: View {
                         
                         if goalNotifications.isEmpty != nil {
                             if goalNotifications.isEmpty! {
+                                Spacer()
+                                
                                 Button("FIX") {
                                     self.fixNotification()
                                 }
-                                Spacer()
                             }
                         }
                     }

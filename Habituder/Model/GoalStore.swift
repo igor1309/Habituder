@@ -12,15 +12,57 @@ import Combine
 
 final class GoalStore: ObservableObject {
     
-    @Published private(set) var goals: [Goal]
-    //    { didSet { save() } }
+    @Published private(set) var goals = [Goal]()
+    
+    @Published var notificationManager = NotificationManager()
+    
+    var haveIssues: Bool {
+        print("goals count \(goals.count)")
+        print("notifications count: \(notificationManager.count)")
+        let goalsNotificationsIssues: Bool = (goals.count != notificationManager.count)
+        print("goalsNotificationsIssues: \(goalsNotificationsIssues)\n")
+        return goalsNotificationsIssues
+    }
+    
+    var anyIssues: Bool {
+        notificationManager.haveIssues || haveIssues
+    }
     
     init() {
+        //  Notifications Delegate
+        let center = UNUserNotificationCenter.current()
+        center.delegate = NotificationManager.shared
+        
+        
+        //  register Notification Categories
+        notificationManager.registerNotificationCategories()
+        
+        
+        //  load goals
         if let savedGoals: [Goal] = loadJSONFromDocDir("goals.json") {
             self.goals = savedGoals
         } else {
-            self.goals = Goal.testingGoals()
+            self.goals = []//Goal.testingGoals()
             save()
+        }
+        
+                
+        //  load notifications
+        center.getPendingNotificationRequests()
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("\nloading notifications…\n")
+                self.notificationManager.parseNotificationRequests($0)
+                print("notificationManager.qty: \(self.notificationManager.count)")
+        }
+        .store(in: &cancellables)
+    }
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    deinit {
+        for cancell in cancellables {
+            cancell.cancel()
         }
     }
 }
@@ -43,7 +85,7 @@ extension GoalStore {
         goals[index] = newValue
         save()
         
-        goals[index].createNotification()
+        notificationManager.createNotification(for: goals[index])
     }
     
     func update(goalIndex: Int, name: String, note: String, reminder: Reminder) {
@@ -53,31 +95,26 @@ extension GoalStore {
         goals[goalIndex].reminder = reminder
         save()
         
-        goals[goalIndex].createNotification()
+        notificationManager.createNotification(for: goals[goalIndex])
     }
     
     func appendTestingStore() {
         goals = goals + Goal.testingGoals()
         save()
-
+        
         for goal in goals {
-            goal.createNotification()
+            notificationManager.createNotification(for: goal)
         }
     }
-
+    
     func createNew() {
-        let empty = Goal(name: "<New Goal>",
-                         note: "<Goal Note>",
-                         reminder: Reminder(repeatPeriod: .daily,
-                                            hour: 9,
-                                            minute: 17))
-        goals.insert(empty, at: 0)
-        goals[0].createNotification()
+        goals.insert(Goal(), at: 0)
+        notificationManager.createNotification(for: goals[0])
         save()
     }
     
     func remove(goal: Goal) {
-        goal.deleteNotification()
+        notificationManager.deleteNotification(id: goal.id)
         goals.removeAll { $0.id == goal.id }
         save()
     }
@@ -89,10 +126,22 @@ extension GoalStore {
     
     func delete(at offsets: IndexSet) {
         for ix in offsets {
-            goals[ix].deleteNotification()
+            notificationManager.deleteNotification(id: goals[ix].id)
         }
         
         goals.remove(atOffsets: offsets)
         save()
+    }
+}
+
+
+extension UNUserNotificationCenter {
+    /// like in https://www.donnywals.com/using-promises-and-futures-in-combine/
+    func getPendingNotificationRequests() -> Future<[UNNotificationRequest], Never> {
+        return Future { promise in
+            self.getPendingNotificationRequests { requests in
+                promise(.success(requests))
+            }
+        }
     }
 }
