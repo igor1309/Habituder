@@ -32,7 +32,7 @@ extension Goal {
         //  ---------------------------------------------------------------
         
         let content = UNMutableNotificationContent()
-        content.title = "\(name)"
+        content.title = name
         content.body = "\(note)\n(\(reminder.description))"
         content.categoryIdentifier = "GOAL_REMINDER"
         content.userInfo = ["GOAL_ID" : identifier]

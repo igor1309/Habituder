@@ -10,16 +10,16 @@ import SwiftUI
 import SwiftPI
 
 struct GoalListView: View {
-    @EnvironmentObject var goalStore: GoalStore
+    @EnvironmentObject var store: Store
+    @EnvironmentObject var notificationSettings: NotificationSettings
     
     @State private var showNotifications = false
     @State private var showEditor = false
     @State private var selected: Int = 0
     
-    private func goalRow(goal: Goal) -> some View {
-        let index = goalStore.goals.firstIndex(of: goal)!
+    private func goalRow(index: Int, goal: Goal) -> some View {
         
-        return VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
                 Text(goal.name)
                     .foregroundColor(.systemOrange)
@@ -43,11 +43,12 @@ struct GoalListView: View {
     }
     
     var body: some View {
+        
         List {
-            ForEach(goalStore.goals) { goal in
+            ForEach(store.goals.enumeratedArray(), id: \.element.id) { index, goal in
                 
                 //  GoalListRow(goal: goal, selected: self.$selected, showEditor: self.$showEditor)
-                self.goalRow(goal: goal)
+                self.goalRow(index: index, goal: goal)
                     .contextMenu {
                         Button(action: {
                             self.remove(goal: goal)
@@ -61,12 +62,13 @@ struct GoalListView: View {
             .onDelete(perform: delete)
         }
         .sheet(isPresented: $showEditor) {
-            GoalEditor(goal: self.goalStore.goals[self.selected], index: self.selected)
-                .environmentObject(self.goalStore)
+            GoalEditor(goal: self.store.goals[self.selected], index: self.selected)
+                .environmentObject(self.store)
+                .environmentObject(self.notificationSettings)
         }
         .onAppear {
             DispatchQueue.main.async {//After(deadline: .now() + 1) {
-                if self.goalStore.anyIssues {
+                if self.store.anyIssues {
                     print("have issues")
                 } else {
                     print("no issues")
@@ -77,14 +79,15 @@ struct GoalListView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
-                TrailingButtonSFSymbol(goalStore.anyIssues ? "bell.fill" : "bell.circle") {
+                TrailingButtonSFSymbol(store.anyIssues ? "bell.fill" : "bell.circle") {
                     self.showNotifications = true
                 }
-                .foregroundColor(goalStore.anyIssues ? .systemRed : .accentColor)
+                .foregroundColor(store.anyIssues ? .systemRed : .accentColor)
                 .sheet(isPresented: $showNotifications) {
-//                Text("test")
-                        AllNotificationsView()
-                        .environmentObject(self.goalStore)
+                    //                Text("test")
+                    AllNotificationsView()
+                        .environmentObject(self.store)
+                        .environmentObject(self.notificationSettings)
                 }
                 TrailingButtonSFSymbol("text.badge.plus") {
                     self.appendTestingStore()
@@ -97,25 +100,25 @@ struct GoalListView: View {
     }
     
     func appendTestingStore() {
-        goalStore.appendTestingStore()
+        store.appendTestingStore()
     }
     
     func createNew() {
-        goalStore.createNew()
+        store.createNewGoal()
         selected = 0
         showEditor = true
     }
     
     private func remove(goal: Goal) {
-        goalStore.remove(goal: goal)
+        store.remove(goal: goal)
     }
     
     private func move(from source: IndexSet, to destination: Int) {
-        goalStore.move(from: source, to: destination)
+        store.move(from: source, to: destination)
     }
     
     private func delete(at offsets: IndexSet) {
-        goalStore.delete(at: offsets)
+        store.delete(at: offsets)
     }
     
 }
@@ -125,7 +128,7 @@ struct GoalListView_Previews: PreviewProvider {
         NavigationView {
             GoalListView()
         }
-        .environmentObject(GoalStore())
+        .environmentObject(Store())
         .environment(\.colorScheme, .dark)
     }
 }

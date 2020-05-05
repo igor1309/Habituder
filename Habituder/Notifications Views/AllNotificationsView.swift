@@ -10,7 +10,8 @@ import SwiftUI
 
 struct AllNotificationsView: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var goalStore: GoalStore
+    @EnvironmentObject var store: Store
+    @EnvironmentObject var notificationSettings: NotificationSettings
     
     @State private var showEditor = false
     @State private var selected: Int = 0
@@ -18,36 +19,29 @@ struct AllNotificationsView: View {
     var body: some View {
         NavigationView {
             Form {
-                if goalStore.anyIssues {
+                if store.haveIssues {
                     Section(header: Text("Issues".uppercased())) {
-                        if goalStore.notificationManager.haveIssues {
-                            Text("Some notifications not registered")
-                                .foregroundColor(.systemRed)
-                        }
-                        
-                        if goalStore.haveIssues {
-                            Text("Goals: \(goalStore.goals.count), with reminders: \(goalStore.notificationManager.count)")
-                                .foregroundColor(.systemRed)
-                        }
+                        Text("Some notifications not registered")
+                            .foregroundColor(.systemRed)
                     }
                 } else {
                     Text("All good, no issues")
                 }
                 
-                if goalStore.notificationManager.count > 0 {
+                if store.goals.count > 0 {
                     Section(footer: Text("Delete all pending and delivered notifications.")) {
                         Button("Delete All Notifications") {
-                            self.goalStore.notificationManager.removeAll()
-                            print("self.goalStore.notificationManager.allNotifications(): \(self.goalStore.notificationManager.allNotifications())")
-                            print("self.goalStore.notificationManager.count: \(self.goalStore.notificationManager.count)")
+                            self.store.removeAll()
+                            print("self.store.notifications: \(self.store.notifications)")
+                            print("self.store.goals.count: \(self.store.goals.count)")
                         }
                         .foregroundColor(.systemRed)
                     }
                 }
                 
                 Section(header: Text("Notifications".uppercased())) {
-                    if goalStore.notificationManager.count > 0 {
-                        ForEach(goalStore.notificationManager.allNotifications(), id: \.self) { notification in
+                    if store.notifications.count > 0 {
+                        ForEach(store.notifications, id: \.self) { notification in
                             Text(notification.request.trigger.debugDescription)
                                 .foregroundColor(.secondary)
                                 .font(.footnote)
@@ -59,14 +53,15 @@ struct AllNotificationsView: View {
                 }
                 
                 Section(header: Text("Current Goals".uppercased())) {
-                    ForEach(goalStore.goals) { goal in
-                        NotificationRow(goal: goal, selected: self.$selected, showEditor: self.$showEditor)
+                    ForEach(store.goals.enumeratedArray(), id: \.element.id) { index, goal in
+                        NotificationRow(index: index, goal: goal, selected: self.$selected, showEditor: self.$showEditor)
                     }
                 }
             }
             .sheet(isPresented: $showEditor) {
-                GoalEditor(goal: self.goalStore.goals[self.selected], index: self.selected)
-                    .environmentObject(self.goalStore)
+                GoalEditor(goal: self.store.goals[self.selected], index: self.selected)
+                    .environmentObject(self.store)
+                    .environmentObject(self.notificationSettings)
             }
             .navigationBarTitle("All Notifications")
             .navigationBarItems(trailing: Button("Done") {
@@ -79,7 +74,7 @@ struct AllNotificationsView: View {
 struct AllNotificationsView_Previews: PreviewProvider {
     static var previews: some View {
         AllNotificationsView()
-            .environmentObject(GoalStore())
+            .environmentObject(Store())
             .environment(\.colorScheme, .dark)
     }
 }

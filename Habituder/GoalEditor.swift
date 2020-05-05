@@ -10,9 +10,15 @@ import SwiftUI
 
 struct GoalEditor: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var goalStore: GoalStore
+    @EnvironmentObject var store: Store
+    @EnvironmentObject var notificationSettings: NotificationSettings
     
+    //  ------------------------------------------------------
+    //  MARK: CHANGE LOGIC AND DELETE GoalNotifications
+    //
     @ObservedObject var goalNotifications: GoalNotifications
+    //
+    //  ------------------------------------------------------
     
     var index: Int
     
@@ -50,20 +56,23 @@ struct GoalEditor: View {
             }
         }
         
-        func smallButtonLabel(title: String, fillColor: Color) -> some View {
-            Text(title)
-                .foregroundColor(.accentColor)
-                .fontWeight(.semibold)
-                .padding(.vertical, 4)
-                .padding(.horizontal, 8)
-                .background(
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .fill(fillColor)
-            )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .stroke(Color.tertiarySystemFill)
-            )
+        func smallButtonLabel(title: String, fillColor: Color, action: @escaping () -> Void) -> some View {
+            Button(action: action) {
+                Text(title)
+                    .foregroundColor(.accentColor)
+                    .fontWeight(.semibold)
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .fill(fillColor)
+                )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .stroke(Color.tertiarySystemFill)
+                )
+            }
+            .buttonStyle(PlainButtonStyle())
         }
         
         return NavigationView {
@@ -93,37 +102,33 @@ struct GoalEditor: View {
                                displayedComponents: .hourAndMinute)
                     
                     HStack {
-                        //                            Text("Quick Time:")
-                        //                                .foregroundColor(.secondary)
-                        
-                        //                            Spacer()
                         
                         ForEach(PartOfDay.allCases, id: \.self) { part in
                             Group {
-                                smallButtonLabel(title: part.id, fillColor: self.reminder.pickerTime == part.time ? Color.quaternarySystemFill : .clear)
-                                    .onTapGesture {
-                                        //  MARK: ADD LIGHT HAPTIC
-                                        //
-                                        
-                                        self.reminder.pickerTime = part.time
+                                smallButtonLabel(title: part.id, fillColor: self.reminder.pickerTime == part.time ? Color.quaternarySystemFill : .clear) {
+                                    
+                                    //  MARK: ADD LIGHT HAPTIC
+                                    //
+                                    
+                                    self.reminder.pickerTime = part.time
                                 }
                                 
                                 Spacer()
                             }
                         }
                         
-                        smallButtonLabel(title: "Now*", fillColor: .clear)
-                            .onTapGesture {
-                                //  MARK: ADD LIGHT HAPTIC
-                                //
-                                withAnimation {
-                                    let date = Date()
-                                    let calendar = Calendar.current
-                                    let hour = calendar.component(.hour, from: date)
-                                    let minute = calendar.component(.minute, from: date) + 1
-                                    let components = DateComponents(hour: hour, minute: minute)
-                                    self.reminder.pickerTime = calendar.date(from: components)!
-                                }
+                        smallButtonLabel(title: "Now*", fillColor: .clear) {
+                            
+                            //  MARK: ADD LIGHT HAPTIC
+                            //
+                            withAnimation {
+                                let date = Date()
+                                let calendar = Calendar.current
+                                let hour = calendar.component(.hour, from: date)
+                                let minute = calendar.component(.minute, from: date) + 1
+                                let components = DateComponents(hour: hour, minute: minute)
+                                self.reminder.pickerTime = calendar.date(from: components)!
+                            }
                         }
                     }
                     .font(.footnote)
@@ -159,7 +164,7 @@ struct GoalEditor: View {
     }
     
     private func update() {
-        goalStore.update(goalIndex: index, name: name, note: note, reminder: reminder)
+        store.updateGoalWithIndex(index, name: name, note: note, reminder: reminder)
     }
     
     private func fixNotification() {
@@ -177,6 +182,8 @@ struct GoalEditorTester: View {
 struct GoalEditor_Previews: PreviewProvider {
     static var previews: some View {
         GoalEditorTester()
+            .environmentObject(Store())
+            .environmentObject(NotificationSettings())
             .environment(\.colorScheme, .dark)
     }
 }

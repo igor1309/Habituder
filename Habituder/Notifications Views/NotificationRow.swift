@@ -9,24 +9,29 @@
 import SwiftUI
 
 struct NotificationRow: View {
-    @EnvironmentObject var goalStore: GoalStore
+    @EnvironmentObject var store: Store
     
+    //  ------------------------------------------------------
+    //  MARK: CHANGE LOGIC AND DELETE GoalNotifications
+    //
     @ObservedObject var goalNotifications: GoalNotifications
+    //
+    //  ------------------------------------------------------
+
     
+    var index: Int
     var goal: Goal
     
     @Binding var selected: Int
     @Binding var showEditor: Bool
     
-    init(goal: Goal, selected: Binding<Int>, showEditor: Binding<Bool>) {
+    init(index: Int, goal: Goal, selected: Binding<Int>, showEditor: Binding<Bool>) {
+        self.index = index
         self.goal = goal
         self._selected = selected
         self._showEditor = showEditor
         self.goalNotifications = GoalNotifications(identifier: goal.identifier)
     }
-    
-    
-    var index: Int { goalStore.goals.firstIndex(of: goal)! }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -50,6 +55,6 @@ struct NotificationRow: View {
 
 struct NotificationRow_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationRow(goal: Goal.testingGoals()[1], selected: .constant(1), showEditor: .constant(false))
+        NotificationRow(index: 1, goal: Goal.testingGoals()[1], selected: .constant(1), showEditor: .constant(false))
     }
 }

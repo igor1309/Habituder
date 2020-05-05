@@ -1,12 +1,11 @@
 //
 //  NotificationSettings.swift
-//  GoalGetter
+//  Habituder
 //
-//  Created by Igor Malyarov on 29.04.2020.
+//  Created by Igor Malyarov on 05.05.2020.
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 import UserNotifications
 import Combine
@@ -49,8 +48,9 @@ final class NotificationSettings: ObservableObject {
         }
         .store(in: &cancellables)
         
-        
         requestedUpdateSubject.send("Update")
+        
+        registerNotificationCategories()
     }
     
     private func openSettingsApp() {
@@ -125,5 +125,41 @@ extension UNUserNotificationCenter {
             }
         }
     }
-    
 }
+
+
+//  Register Notification Categories
+extension NotificationSettings {
+    /// https://developer.apple.com/documentation/usernotifications/declaring_your_actionable_notification_types
+    func registerNotificationCategories() {
+        // Define the custom actions
+        let remindLaterAction = UNNotificationAction(
+            identifier: "REMIND_LATER",
+            title: "Remind me later",
+            options: UNNotificationActionOptions(rawValue: 0))
+        
+        let doneAction = UNNotificationAction(
+            identifier: "DONE",
+            title: "Done for today",
+            options: UNNotificationActionOptions(rawValue: 0))
+        
+        let editAction = UNNotificationAction(
+            identifier: "EDIT",
+            title: "Edit",
+            options: UNNotificationActionOptions.foreground)
+        
+        // Define the notification type
+        let goalReminderCategory = UNNotificationCategory(
+            identifier: "GOAL_REMINDER",
+            actions: [remindLaterAction, doneAction, editAction],
+            intentIdentifiers: [],
+            hiddenPreviewsBodyPlaceholder: "",
+            options: .customDismissAction)
+        
+        // Register the notification type
+        let center = UNUserNotificationCenter.current()
+        center.setNotificationCategories([goalReminderCategory])
+        print("Notification Categories are set (registered).")
+    }
+}
+

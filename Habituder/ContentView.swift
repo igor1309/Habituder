@@ -10,20 +10,21 @@ import SwiftUI
 import SwiftPI
 
 struct ContentView: View {
-    @EnvironmentObject var goalStore: GoalStore
+    @EnvironmentObject var store: Store
     
     var body: some View {
         NavigationView {
 //            PartOfDaySettingsView()
             GoalListView()
         }
+        .onAppear { self.store.load() }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(GoalStore())
+            .environmentObject(Store())
             .environment(\.colorScheme, .dark)
     }
 }
