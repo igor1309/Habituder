@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct NotificationSettingsView: View {
-    @ObservedObject var notificationSettings = NotificationSettings()
+    @EnvironmentObject var notificationSettings: NotificationSettings
     
     var body: some View {
         Group {
@@ -47,6 +47,7 @@ struct NotificationSettingsView_Previews: PreviewProvider {
         Form {
             NotificationSettingsView()
         }
+        .environmentObject(NotificationSettings())
         .environment(\.colorScheme, .dark)
     }
 }
