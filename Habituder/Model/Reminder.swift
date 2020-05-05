@@ -46,6 +46,13 @@ struct Reminder: Codable {
 }
 
 extension Reminder {
+    var nextDate: Date {
+        let calendar = Calendar.current
+        //  MARK: WHAT DATE SHOULD I USE????
+        let startDate = calendar.startOfDay(for: Date())
+        return calendar.nextDate(after: startDate, matching: dateComponents, matchingPolicy: .nextTime)!
+    }
+    
     func toString() -> String {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.hour, .minute], from: pickerTime)

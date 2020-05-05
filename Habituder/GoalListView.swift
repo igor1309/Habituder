@@ -27,13 +27,21 @@ struct GoalListView: View {
                 Spacer()
                 
                 Text(goal.reminder.description)
-                    .foregroundColor(.tertiary)
+                    .foregroundColor(.secondary)
                     .font(.caption)
             }
             
-            Text(goal.note)
-                .foregroundColor(.secondary)
-                .font(.subheadline)
+            HStack(alignment: .firstTextBaseline) {
+                Text(goal.note)
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
+                
+                Spacer()
+                
+                Text(goal.reminder.nextDate.dateAndTimetoString())
+                    .foregroundColor(goal.reminder.nextDate > Date() ? .tertiary : .systemRed)
+                    .font(.caption)
+            }
         }
         .contentShape(Rectangle())
         .onTapGesture {
@@ -68,7 +76,7 @@ struct GoalListView: View {
         }
         .onAppear {
             DispatchQueue.main.async {//After(deadline: .now() + 1) {
-                if self.store.anyIssues {
+                if self.store.haveIssues {
                     print("have issues")
                 } else {
                     print("no issues")
@@ -79,10 +87,13 @@ struct GoalListView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
-                TrailingButtonSFSymbol(store.anyIssues ? "bell.fill" : "bell.circle") {
+                TrailingButtonSFSymbol("textformat.size") {
+                    self.sortByNextDate()
+                }
+                TrailingButtonSFSymbol(store.haveIssues ? "bell.fill" : "bell.circle") {
                     self.showNotifications = true
                 }
-                .foregroundColor(store.anyIssues ? .systemRed : .accentColor)
+                .foregroundColor(store.haveIssues ? .systemRed : .accentColor)
                 .sheet(isPresented: $showNotifications) {
                     //                Text("test")
                     AllNotificationsView()
@@ -97,6 +108,10 @@ struct GoalListView: View {
                 }
             }
         )
+    }
+    
+    func sortByNextDate() {
+        store.sortByNextDate()
     }
     
     func appendTestingStore() {

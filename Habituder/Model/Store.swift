@@ -11,27 +11,17 @@ import UserNotifications
 import Combine
 
 final class Store: NSObject, ObservableObject {
+    //  MARK: MOVE TO BETTER PLACE AFTER DONE
+    
     
     @Published private(set) var goals: [Goal] = []
     @Published var notifications: [Notification] = []
     
     var haveIssues: Bool {
-//        print("goals count:         \(goals.count)")
-//        print("notifications count: \(notifications.count)")
-        
-        //  ------------------------------------------------------
-        //  MARK: THIS THING SHOULD BE SMART
-        //  don't just compare counts, dig deeper inside
-        //  using isNotificationRegistered
-        //  like goals.reduce(true, { $0 && isNotificationRegistered(for: $1) })
-        //  ------------------------------------------------------
+        //    print("goals count:         \(goals.count)")
+        //    print("notifications count: \(notifications.count)")
         return !goals.reduce(true, { $0 && isNotificationRegistered(for: $1) })
     }
-    
-    //  ------------------------------------------------------
-    //  MARK: REMOVE THIS
-    var anyIssues: Bool { haveIssues }
-    //  ------------------------------------------------------
     
     override init() {
         super.init()
@@ -176,9 +166,15 @@ extension Store {
             createNotification(for: goal)
         }
     }
+    
+    func sortByNextDate() {
+        goals.sort(by: { $0.reminder.nextDate < $1.reminder.nextDate })
+        save()
+    }
 }
 
 
+//  MARK: - Goal and its Notification
 extension Store {
     func isNotificationRegistered(for goal: Goal) -> Bool {
         guard let notification = notifications
