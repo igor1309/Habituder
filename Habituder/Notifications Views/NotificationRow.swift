@@ -19,8 +19,8 @@ struct NotificationRow: View {
     //  ------------------------------------------------------
 
     
-    var index: Int
-    var goal: Goal
+    let index: Int
+    let goal: Goal
     
     @Binding var selected: Int
     @Binding var showEditor: Bool

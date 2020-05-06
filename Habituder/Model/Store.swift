@@ -6,13 +6,12 @@
 //  Copyright © 2020 Igor Malyarov. All rights reserved.
 //
 
+import SwiftUI
 import SwiftPI
 import UserNotifications
 import Combine
 
 final class Store: NSObject, ObservableObject {
-    //  MARK: MOVE TO BETTER PLACE AFTER DONE
-    
     
     @Published private(set) var goals: [Goal] = []
     @Published var notifications: [Notification] = []
@@ -177,12 +176,45 @@ extension Store {
 //  MARK: - Goal and its Notification
 extension Store {
     func isNotificationRegistered(for goal: Goal) -> Bool {
+        //  MARK: В ЭТОЙ РЕАЛИЗАЦИИ НЕ УЧИТЫВАЕТСЯ, ЧТО МОЖЕТ БЫТЬ НЕСКОЛЬКО УВЕДОМЛЕНИЙ ДЛЯ ОДНОЙ GOAL
         guard let notification = notifications
             .first(where: { $0.id == goal.id }) else {
                 return false
         }
         
         return notification.isRegistered
+    }
+    
+    func pendingNotificationsStr(for goal: Goal) -> String {
+        let notificationsForGoal = notifications.filter { $0.id == goal.id }
+        guard notificationsForGoal.isNotEmpty else {
+                return "ISSUE: reminder not registered"
+        }
+        
+        let debugDescriptions = notificationsForGoal.map { $0.request.trigger.debugDescription }
+        let debugDescriptionsStr = ListFormatter.localizedString(byJoining: debugDescriptions)
+        return "reminder registered\ntrigger(s): \(debugDescriptionsStr)"
+    }
+    
+    func pendingNotificationsColor(for goal: Goal) -> Color {
+        hasPendingNotifications(for: goal)
+            ? .secondary
+            : .systemRed
+    }
+    
+    func pendingNotificationsFont(for goal: Goal) -> Font {
+        hasPendingNotifications(for: goal)
+            ? .caption
+            : .body
+    }
+    
+    func hasPendingNotifications(for goal: Goal) -> Bool {
+        let notificationsForGoal = notifications.filter { $0.id == goal.id }
+        guard notificationsForGoal.isNotEmpty else {
+                return false
+        }
+        
+        return notificationsForGoal.reduce(true, { $0 && $1.isRegistered })
     }
 }
 

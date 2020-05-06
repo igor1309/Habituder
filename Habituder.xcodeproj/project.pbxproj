@@ -29,6 +29,7 @@
 		2AA81BC4246178AD00281103 /* NotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC3246178AD00281103 /* NotificationSettings.swift */; };
 		2AA81BC6246178EB00281103 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC5246178EB00281103 /* Store.swift */; };
 		2AA81BC824617AA400281103 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC724617AA400281103 /* Notification.swift */; };
+		2AA81BCA2462B40500281103 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC92462B40500281103 /* PendingNotificationsView.swift */; };
 		2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */; };
 		2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */; };
 		2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC572245B7AA500BA1AE3 /* ContentView.swift */; };
@@ -36,6 +37,7 @@
 		2AEEC578245B7AA600BA1AE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEC577245B7AA600BA1AE3 /* Preview Assets.xcassets */; };
 		2AEEC57B245B7AA600BA1AE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEC579245B7AA600BA1AE3 /* LaunchScreen.storyboard */; };
 		2AEEC584245B7B1D00BA1AE3 /* SwiftPI in Frameworks */ = {isa = PBXBuildFile; productRef = 2AEEC583245B7B1D00BA1AE3 /* SwiftPI */; };
+		2AEF458D2462BE7B000F0584 /* PendingNotificationsViewOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEF458C2462BE7B000F0584 /* PendingNotificationsViewOLD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,7 @@
 		2AA81BC3246178AD00281103 /* NotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettings.swift; sourceTree = "<group>"; };
 		2AA81BC5246178EB00281103 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		2AA81BC724617AA400281103 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		2AA81BC92462B40500281103 /* PendingNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsView.swift; sourceTree = "<group>"; };
 		2AEEC56B245B7AA500BA1AE3 /* Habituder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habituder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 		2AEEC577245B7AA600BA1AE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2AEEC57A245B7AA600BA1AE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AEEC57C245B7AA600BA1AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AEF458C2462BE7B000F0584 /* PendingNotificationsViewOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsViewOLD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,8 @@
 				2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */,
 				2A842426246048800002EDB9 /* NotificationRow.swift */,
 				2A2E1772245E24C400A57D42 /* NotificationSettingsView.swift */,
+				2AA81BC92462B40500281103 /* PendingNotificationsView.swift */,
+				2AEF458C2462BE7B000F0584 /* PendingNotificationsViewOLD.swift */,
 			);
 			path = "Notifications Views";
 			sourceTree = "<group>";
@@ -267,6 +273,7 @@
 				2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */,
 				2AA81BC6246178EB00281103 /* Store.swift in Sources */,
 				2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */,
+				2AA81BCA2462B40500281103 /* PendingNotificationsView.swift in Sources */,
 				2A0BD6DB245CC7C200C27F9B /* RepeatPeriod.swift in Sources */,
 				2A0BD6D9245CC4EE00C27F9B /* Reminder.swift in Sources */,
 				2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */,
@@ -275,6 +282,7 @@
 				2A2E1770245E0D4300A57D42 /* PartOfDaySettingsView.swift in Sources */,
 				2A2E1779245EE54D00A57D42 /* AllNotificationsView.swift in Sources */,
 				2A842427246048800002EDB9 /* NotificationRow.swift in Sources */,
+				2AEF458D2462BE7B000F0584 /* PendingNotificationsViewOLD.swift in Sources */,
 				2A2E1763245D9D8100A57D42 /* WeekdayPicker.swift in Sources */,
 				2A2E1773245E24C400A57D42 /* NotificationSettingsView.swift in Sources */,
 				2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */,
@@ -430,7 +438,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photoigor.Habituder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -452,7 +460,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photoigor.Habituder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

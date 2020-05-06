@@ -13,13 +13,6 @@ struct GoalEditor: View {
     @EnvironmentObject var store: Store
     @EnvironmentObject var notificationSettings: NotificationSettings
     
-    //  ------------------------------------------------------
-    //  MARK: CHANGE LOGIC AND DELETE GoalNotifications
-    //
-    @ObservedObject var goalNotifications: GoalNotifications
-    //
-    //  ------------------------------------------------------
-    
     var index: Int
     
     @State private var name: String
@@ -31,7 +24,6 @@ struct GoalEditor: View {
         self._note = State(initialValue: goal.note)
         self._reminder = State(initialValue: goal.reminder)
         self.index = index
-        self.goalNotifications = GoalNotifications(identifier: goal.identifier)
     }
     
     @State private var partOfDay: PartOfDay = .morning
@@ -133,27 +125,8 @@ struct GoalEditor: View {
                     }
                     .font(.footnote)
                 }
-                
-                Section(header: Text("Pending Notifications".uppercased())
-                ) {
-                    HStack {
-                        Text(goalNotifications.pendingNotifications)
-                            .foregroundColor(goalNotifications.color)
-                            .font(goalNotifications.font)
-                        
-                        if goalNotifications.isEmpty != nil {
-                            if goalNotifications.isEmpty! {
-                                Spacer()
-                                
-                                Button("FIX") {
-                                    self.fixNotification()
-                                }
-                            }
-                        }
-                    }
-                    
-                    NotificationSettingsView()
-                }
+
+                PendingNotificationsView(goal: store.goals[index])
             }
             .navigationBarTitle(name)
             .navigationBarItems(trailing: Button("Done") {

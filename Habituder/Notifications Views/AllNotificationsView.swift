@@ -21,7 +21,7 @@ struct AllNotificationsView: View {
             Form {
                 if store.haveIssues {
                     Section(header: Text("Issues".uppercased())) {
-                        Text("Some notifications not registered")
+                        Text("Issue: Some notifications not registered")
                             .foregroundColor(.systemRed)
                     }
                 } else {
