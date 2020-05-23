@@ -11,14 +11,6 @@ import SwiftUI
 struct NotificationRow: View {
     @EnvironmentObject var store: Store
     
-    //  ------------------------------------------------------
-    //  MARK: CHANGE LOGIC AND DELETE GoalNotifications
-    //
-    @ObservedObject var goalNotifications: GoalNotifications
-    //
-    //  ------------------------------------------------------
-
-    
     let index: Int
     let goal: Goal
     
@@ -30,7 +22,6 @@ struct NotificationRow: View {
         self.goal = goal
         self._selected = selected
         self._showEditor = showEditor
-        self.goalNotifications = GoalNotifications(identifier: goal.identifier)
     }
     
     var body: some View {
@@ -41,8 +32,8 @@ struct NotificationRow: View {
                 .foregroundColor(.secondary)
                 .font(.footnote)
             
-            Text(goalNotifications.pendingNotifications)
-                .foregroundColor(goalNotifications.color)
+            Text(store.pendingNotificationsStr(for: goal))
+                .foregroundColor(store.pendingNotificationsColor(for: goal))
                 .font(.footnote)
         }
         .contentShape(Rectangle())

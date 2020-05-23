@@ -21,7 +21,6 @@
 		2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E176D245E049200A57D42 /* PartOfDay.swift */; };
 		2A2E1770245E0D4300A57D42 /* PartOfDaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E176F245E0D4300A57D42 /* PartOfDaySettingsView.swift */; };
 		2A2E1773245E24C400A57D42 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1772245E24C400A57D42 /* NotificationSettingsView.swift */; };
-		2A2E1777245E380800A57D42 /* GoalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1776245E380800A57D42 /* GoalNotifications.swift */; };
 		2A2E1779245EE54D00A57D42 /* AllNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */; };
 		2A842427246048800002EDB9 /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A842426246048800002EDB9 /* NotificationRow.swift */; };
 		2AA81B8F2460C0D500281103 /* testingGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81B8E2460C0D500281103 /* testingGoals.swift */; };
@@ -30,6 +29,7 @@
 		2AA81BC6246178EB00281103 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC5246178EB00281103 /* Store.swift */; };
 		2AA81BC824617AA400281103 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC724617AA400281103 /* Notification.swift */; };
 		2AA81BCA2462B40500281103 /* PendingNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA81BC92462B40500281103 /* PendingNotificationsView.swift */; };
+		2AB46D912479A779003B6F3E /* TextFieldWithReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB46D902479A779003B6F3E /* TextFieldWithReset.swift */; };
 		2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */; };
 		2AEEC571245B7AA500BA1AE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */; };
 		2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEEC572245B7AA500BA1AE3 /* ContentView.swift */; };
@@ -37,7 +37,6 @@
 		2AEEC578245B7AA600BA1AE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEC577245B7AA600BA1AE3 /* Preview Assets.xcassets */; };
 		2AEEC57B245B7AA600BA1AE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEC579245B7AA600BA1AE3 /* LaunchScreen.storyboard */; };
 		2AEEC584245B7B1D00BA1AE3 /* SwiftPI in Frameworks */ = {isa = PBXBuildFile; productRef = 2AEEC583245B7B1D00BA1AE3 /* SwiftPI */; };
-		2AEF458D2462BE7B000F0584 /* PendingNotificationsViewOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEF458C2462BE7B000F0584 /* PendingNotificationsViewOLD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +54,6 @@
 		2A2E176D245E049200A57D42 /* PartOfDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDay.swift; sourceTree = "<group>"; };
 		2A2E176F245E0D4300A57D42 /* PartOfDaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartOfDaySettingsView.swift; sourceTree = "<group>"; };
 		2A2E1772245E24C400A57D42 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
-		2A2E1776245E380800A57D42 /* GoalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalNotifications.swift; sourceTree = "<group>"; };
 		2A2E1778245EE54D00A57D42 /* AllNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotificationsView.swift; sourceTree = "<group>"; };
 		2A842426246048800002EDB9 /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
 		2AA81B8E2460C0D500281103 /* testingGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testingGoals.swift; sourceTree = "<group>"; };
@@ -64,6 +62,7 @@
 		2AA81BC5246178EB00281103 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		2AA81BC724617AA400281103 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2AA81BC92462B40500281103 /* PendingNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsView.swift; sourceTree = "<group>"; };
+		2AB46D902479A779003B6F3E /* TextFieldWithReset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithReset.swift; sourceTree = "<group>"; };
 		2AEEC56B245B7AA500BA1AE3 /* Habituder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habituder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEEC56E245B7AA500BA1AE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AEEC570245B7AA500BA1AE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +71,6 @@
 		2AEEC577245B7AA600BA1AE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2AEEC57A245B7AA600BA1AE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AEEC57C245B7AA600BA1AE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2AEF458C2462BE7B000F0584 /* PendingNotificationsViewOLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsViewOLD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +91,6 @@
 				2AA81BC3246178AD00281103 /* NotificationSettings.swift */,
 				2AA81BC5246178EB00281103 /* Store.swift */,
 				2AA81BC724617AA400281103 /* Notification.swift */,
-				2A2E1776245E380800A57D42 /* GoalNotifications.swift */,
 				2A0BD6D6245CC27D00C27F9B /* Goal.swift */,
 				2AA81B8E2460C0D500281103 /* testingGoals.swift */,
 				2A0BD6D8245CC4EE00C27F9B /* Reminder.swift */,
@@ -139,9 +136,16 @@
 				2A842426246048800002EDB9 /* NotificationRow.swift */,
 				2A2E1772245E24C400A57D42 /* NotificationSettingsView.swift */,
 				2AA81BC92462B40500281103 /* PendingNotificationsView.swift */,
-				2AEF458C2462BE7B000F0584 /* PendingNotificationsViewOLD.swift */,
 			);
 			path = "Notifications Views";
+			sourceTree = "<group>";
+		};
+		2AB46D922479AA5F003B6F3E /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				2AB46D902479A779003B6F3E /* TextFieldWithReset.swift */,
+			);
+			path = "Supporting Views";
 			sourceTree = "<group>";
 		};
 		2AEEC562245B7AA500BA1AE3 = {
@@ -168,6 +172,7 @@
 				2AEEC572245B7AA500BA1AE3 /* ContentView.swift */,
 				2A0BD6D1245CC22600C27F9B /* GoalListView.swift */,
 				2A2E1767245DD1AD00A57D42 /* GoalEditor.swift */,
+				2AB46D922479AA5F003B6F3E /* Supporting Views */,
 				2A842425246048690002EDB9 /* Notifications Views */,
 				2A2E1771245E0F7200A57D42 /* TODO */,
 				2A2E1766245DA91800A57D42 /* Extensions */,
@@ -268,10 +273,10 @@
 			files = (
 				2A2E175F245D97D700A57D42 /* WeeklyReminderPicker.swift in Sources */,
 				2A2E176C245DF5A200A57D42 /* MonthView.swift in Sources */,
-				2A2E1777245E380800A57D42 /* GoalNotifications.swift in Sources */,
 				2A2E1765245DA90D00A57D42 /* DateComponents+Ext.swift in Sources */,
 				2AEEC56F245B7AA500BA1AE3 /* AppDelegate.swift in Sources */,
 				2AA81BC6246178EB00281103 /* Store.swift in Sources */,
+				2AB46D912479A779003B6F3E /* TextFieldWithReset.swift in Sources */,
 				2A2E176E245E049200A57D42 /* PartOfDay.swift in Sources */,
 				2AA81BCA2462B40500281103 /* PendingNotificationsView.swift in Sources */,
 				2A0BD6DB245CC7C200C27F9B /* RepeatPeriod.swift in Sources */,
@@ -282,7 +287,6 @@
 				2A2E1770245E0D4300A57D42 /* PartOfDaySettingsView.swift in Sources */,
 				2A2E1779245EE54D00A57D42 /* AllNotificationsView.swift in Sources */,
 				2A842427246048800002EDB9 /* NotificationRow.swift in Sources */,
-				2AEF458D2462BE7B000F0584 /* PendingNotificationsViewOLD.swift in Sources */,
 				2A2E1763245D9D8100A57D42 /* WeekdayPicker.swift in Sources */,
 				2A2E1773245E24C400A57D42 /* NotificationSettingsView.swift in Sources */,
 				2AEEC573245B7AA500BA1AE3 /* ContentView.swift in Sources */,
@@ -429,7 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Habituder/Preview Content\"";
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;
@@ -451,7 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Habituder/Preview Content\"";
 				DEVELOPMENT_TEAM = VRVJ9YNRQU;
 				ENABLE_PREVIEWS = YES;

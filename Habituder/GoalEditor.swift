@@ -71,10 +71,10 @@ struct GoalEditor: View {
             Form {
                 Section(header: Text("Details".uppercased())
                 ) {
-                    TextField("Goal Name", text: $name)
+                    TextFieldWithReset("Goal Name", text: $name)
                         .foregroundColor(.systemOrange)
                     
-                    TextField("Goal Note", text: $note)
+                    TextFieldWithReset("Goal Note", text: $note)
                 }
                 
                 Section(header: Text("Remind Me".uppercased()),

@@ -43,7 +43,7 @@ final class Store: NSObject, ObservableObject {
 // MARK: - Save + Load
 extension Store {
     func save() {
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             let filename = "goals.json"
             print("saving \(filename)…")
             saveJSONToDocDir(data: self.goals, filename: filename)

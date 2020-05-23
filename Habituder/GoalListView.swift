@@ -87,10 +87,10 @@ struct GoalListView: View {
         .navigationBarItems(
             leading: EditButton(),
             trailing: HStack {
-                TrailingButtonSFSymbol("textformat.size") {
+                TrailingButtonSFSymbol("arrow.up.arrow.down") {
                     self.sortByNextDate()
                 }
-                TrailingButtonSFSymbol(store.haveIssues ? "bell.fill" : "bell.circle") {
+                TrailingButtonSFSymbol(store.haveIssues ? "bell.fill" : "bell") {
                     self.showNotifications = true
                 }
                 .foregroundColor(store.haveIssues ? .systemRed : .accentColor)
